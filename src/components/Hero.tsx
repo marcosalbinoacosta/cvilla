@@ -42,7 +42,7 @@ export default function Hero() {
           </h1>
 
           <p className="font-serif text-lg md:text-xl italic text-navy/60 mb-10 animate-fade-up" style={{ animationDelay: "150ms" }}>
-            Es momento de construir con base sólida.
+            Creo en crecer con propósito, principios firmes y decisiones que construyen negocios sólidos. Si buscás eso, este espacio es para vos.
           </p>
 
           {/* Bullet points with decorative icons */}

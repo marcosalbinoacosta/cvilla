@@ -82,7 +82,7 @@ export default function Servicios() {
                 necesitan para ordenar y escalar su negocio.
               </p>
               <p className="text-sm text-cream/55 font-light leading-relaxed mb-8">
-                Las mentorías NO son un acompañamiento genérico — es un proceso
+                Las mentorías NO son un acompañamiento genérico, es un proceso
                 de transformación donde pongo mi experiencia, conocimiento y
                 mirada crítica al servicio de tu negocio.
               </p>

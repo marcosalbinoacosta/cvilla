@@ -39,7 +39,7 @@ export default function SobreMi() {
           <ScrollReveal delay={100}>
             <p className="text-sm md:text-base text-gray-500 font-light leading-relaxed mb-4">
               Licenciada con años de experiencia acompañando pymes y emprendedores
-              a construir negocios que funcionan — no solo que existen. Creo que la
+              a construir negocios que funcionan, no solo que existen. Creo que la
               estrategia sin propósito es ruido, y el propósito sin acción es solo
               una idea bonita.
             </p>

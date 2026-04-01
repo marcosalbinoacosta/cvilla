@@ -65,7 +65,7 @@ export default function Proposito() {
             }`}
           >
             <p className="text-cream/60 text-sm md:text-base font-light leading-relaxed">
-              Creo en negocios construidos con base sólida — donde la estrategia
+              Creo en negocios construidos con base sólida, donde la estrategia
               no está separada de los valores, y donde crecer no significa perder
               el rumbo.
             </p>
