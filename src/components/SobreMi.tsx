@@ -2,6 +2,7 @@ import Image from "next/image";
 import ScrollReveal from "./ScrollReveal";
 
 const valores = [
+  "Líder de Transformación Digital en pymes",
   "Liderazgo y comunicación",
   "Equipos de alto rendimiento",
   "Gestión de proyectos exitosos",
@@ -18,7 +19,7 @@ export default function SobreMi() {
             alt="Catalina Villafañe"
             width={600}
             height={750}
-            className="w-full aspect-[3/4] object-cover object-center rounded-sm"
+            className="w-full h-auto aspect-[3/4] object-cover object-center rounded-sm"
             sizes="(max-width: 768px) 100vw, 50vw"
           />
           <div className="absolute -bottom-4 -right-4 w-36 h-36 border border-gold/40 pointer-events-none hidden md:block" />

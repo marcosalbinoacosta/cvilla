@@ -35,14 +35,6 @@ export default function Navbar() {
               </a>
             </li>
           ))}
-          <li>
-            <a
-              href="#contacto"
-              className="bg-navy text-white text-xs font-medium uppercase tracking-widest px-5 py-2.5 hover:bg-navy/90 transition-colors"
-            >
-              Hablemos
-            </a>
-          </li>
         </ul>
 
         {/* Mobile hamburger */}
@@ -78,15 +70,6 @@ export default function Navbar() {
                 </a>
               </li>
             ))}
-            <li>
-              <a
-                href="#contacto"
-                onClick={() => setOpen(false)}
-                className="inline-block bg-navy text-white text-sm font-medium uppercase tracking-widest px-6 py-3 mt-2"
-              >
-                Hablemos
-              </a>
-            </li>
           </ul>
         </div>
       )}

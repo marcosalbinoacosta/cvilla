@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- C — Cormorant Garamond style (serif, navy) -->
+  <text x="82" y="126" text-anchor="middle" font-family="'Cormorant Garamond', 'Georgia', serif" font-size="100" font-weight="600" fill="#1B2E6B" letter-spacing="-2">
+    C
+  </text>
+
+  <!-- V — Dancing Script style (script, terracota) -->
+  <text x="132" y="130" text-anchor="middle" font-family="'Dancing Script', 'Brush Script MT', cursive" font-size="80" font-weight="600" fill="#B87B6A">
+    V
+  </text>
+
+  <!-- Subtle decorative line below -->
+  <line x1="55" y1="145" x2="145" y2="145" stroke="#B87B6A" stroke-width="0.75" opacity="0.4"/>
+</svg>

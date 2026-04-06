@@ -3,14 +3,14 @@ import ScrollReveal from "./ScrollReveal";
 
 export default function CtaBanner() {
   return (
-    <section className="relative py-20 md:py-28 overflow-hidden">
+    <section className="relative py-28 md:py-40 overflow-hidden">
       {/* Background image with fixed-like effect */}
       <div className="absolute inset-0">
         <Image
           src="/images/speaker-stage.webp"
           alt=""
           fill
-          className="object-cover object-center"
+          className="object-cover object-[center_25%]"
           aria-hidden="true"
         />
         <div className="absolute inset-0 bg-navy/80" />

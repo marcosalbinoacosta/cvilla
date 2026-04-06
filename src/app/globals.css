@@ -4,13 +4,15 @@
   --color-navy: #1B2E6B;
   --color-cream: #F7F2EC;
   --color-beige: #EDE4D8;
-  --color-gold: #B89A72;
+  --color-gold: #B87B6A;
   --color-text: #2C2C2C;
   --font-serif: "Cormorant Garamond", Georgia, serif;
   --font-sans: "Inter", system-ui, sans-serif;
   --font-script: "Dancing Script", cursive;
   --animate-fade-up: fade-up 0.7s ease-out both;
   --animate-fade-in: fade-in 0.6s ease-out both;
+  --animate-marquee: marquee 40s linear infinite;
+  --animate-marquee-slow: marquee 50s linear infinite;
 }
 
 @keyframes fade-up {
@@ -29,6 +31,11 @@
   to { opacity: 1; }
 }
 
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -37,6 +44,19 @@ body {
   font-family: var(--font-sans);
   background: #ffffff;
   color: var(--color-text);
+}
+
+/* Respetar preferencia del usuario de reducir movimiento */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 /* Divider line between sections — inspired by naylanorryh.com */

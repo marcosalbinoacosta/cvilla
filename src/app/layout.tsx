@@ -22,9 +22,32 @@ const dancingScript = Dancing_Script({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://catalinavillafane.com"),
   title: "Catalina Villafañe — Consultora & Mentora de Negocios",
   description:
     "Negocios que crecen con estrategia y propósito. Consultoría, mentoría y capacitación para pymes y emprendedores.",
+  openGraph: {
+    title: "Catalina Villafañe — Consultora & Mentora de Negocios",
+    description:
+      "Negocios que crecen con estrategia y propósito. Consultoría, mentoría y capacitación para pymes y emprendedores.",
+    type: "website",
+    locale: "es_AR",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Catalina Villafañe — Consultora & Mentora de Negocios",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Catalina Villafañe — Consultora & Mentora de Negocios",
+    description:
+      "Negocios que crecen con estrategia y propósito. Consultoría, mentoría y capacitación para pymes y emprendedores.",
+    images: ["/og-image.png"],
+  },
 };
 
 export default function RootLayout({

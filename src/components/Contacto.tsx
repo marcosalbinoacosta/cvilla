@@ -1,3 +1,4 @@
+import Image from "next/image";
 import ScrollReveal from "./ScrollReveal";
 
 export default function Contacto() {
@@ -35,23 +36,41 @@ export default function Contacto() {
         {/* Right — form */}
         <ScrollReveal delay={150}>
           <form className="text-left">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-              <input
-                type="text"
-                placeholder="Tu nombre"
-                className="w-full px-4 py-3.5 border border-beige bg-white text-sm text-text outline-none focus:border-navy transition-colors duration-300"
-              />
-              <input
-                type="email"
-                placeholder="Tu email"
-                className="w-full px-4 py-3.5 border border-beige bg-white text-sm text-text outline-none focus:border-navy transition-colors duration-300"
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5">
+              <div>
+                <label htmlFor="nombre" className="block text-xs tracking-wider uppercase text-navy/60 mb-2">
+                  Nombre
+                </label>
+                <input
+                  id="nombre"
+                  type="text"
+                  placeholder="Tu nombre"
+                  className="w-full px-4 py-3.5 border border-beige bg-white text-sm text-text outline-none focus:border-navy transition-colors duration-300"
+                />
+              </div>
+              <div>
+                <label htmlFor="email" className="block text-xs tracking-wider uppercase text-navy/60 mb-2">
+                  Email
+                </label>
+                <input
+                  id="email"
+                  type="email"
+                  placeholder="Tu email"
+                  className="w-full px-4 py-3.5 border border-beige bg-white text-sm text-text outline-none focus:border-navy transition-colors duration-300"
+                />
+              </div>
+            </div>
+            <div className="mb-6">
+              <label htmlFor="mensaje" className="block text-xs tracking-wider uppercase text-navy/60 mb-2">
+                Mensaje
+              </label>
+              <textarea
+                id="mensaje"
+                placeholder="¿En qué puedo ayudarte?"
+                rows={5}
+                className="w-full px-4 py-3.5 border border-beige bg-white text-sm text-text outline-none focus:border-navy transition-colors duration-300 resize-none"
               />
             </div>
-            <textarea
-              placeholder="¿En qué puedo ayudarte?"
-              rows={5}
-              className="w-full px-4 py-3.5 border border-beige bg-white text-sm text-text outline-none focus:border-navy transition-colors duration-300 resize-none mb-6"
-            />
             <button
               type="submit"
               className="w-full sm:w-auto bg-navy text-white text-xs font-medium uppercase tracking-widest px-10 py-4 hover:bg-navy/90 transition-all duration-300 hover:shadow-lg hover:shadow-navy/20"
@@ -61,6 +80,35 @@ export default function Contacto() {
           </form>
         </ScrollReveal>
       </div>
+
+      {/* Versículo bíblico */}
+      <ScrollReveal className="max-w-3xl mx-auto mt-20 pt-14 border-t border-beige">
+        <div className="flex flex-col items-center text-center">
+          <div className="relative w-full max-w-sm mb-8">
+            <div className="relative overflow-hidden rounded-sm shadow-lg shadow-beige/60">
+              <Image
+                src="/images/biblia.webp"
+                alt="Manos sobre la Biblia abierta"
+                width={400}
+                height={267}
+                className="w-full h-auto"
+                sizes="(max-width: 768px) 100vw, 384px"
+              />
+              <div className="absolute inset-0 border border-gold/20 rounded-sm pointer-events-none" />
+            </div>
+            <div className="absolute -bottom-3 -right-3 w-full h-full border border-gold/25 rounded-sm pointer-events-none -z-10" />
+          </div>
+          <blockquote className="max-w-lg">
+            <p className="font-serif text-lg md:text-xl italic text-navy/80 leading-relaxed mb-4">
+              &ldquo;No nos cansemos, pues, de hacer bien; porque a su tiempo
+              segaremos, si no desmayamos.&rdquo;
+            </p>
+            <cite className="text-xs tracking-[0.18em] uppercase text-gold/80 not-italic">
+              Gálatas 6:9
+            </cite>
+          </blockquote>
+        </div>
+      </ScrollReveal>
     </section>
   );
 }

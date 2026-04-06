@@ -10,7 +10,7 @@ export default function Footer() {
               Catalina{" "}
               <span className="font-script text-gold text-2xl">Villafañe</span>
             </p>
-            <p className="text-xs text-cream/40 leading-relaxed max-w-xs">
+            <p className="text-xs text-cream/60 leading-relaxed max-w-xs">
               Consultora &amp; Mentora de Negocios. Ayudo a pymes y
               emprendedores a crecer con estrategia y propósito.
             </p>
@@ -32,7 +32,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <a
                     href={link.href}
-                    className="text-xs text-cream/50 hover:text-cream/80 transition-colors duration-300"
+                    className="text-xs text-cream/70 hover:text-cream/90 transition-colors duration-300"
                   >
                     {link.label}
                   </a>
@@ -52,7 +52,7 @@ export default function Footer() {
                   href="https://instagram.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs text-cream/50 hover:text-cream/80 transition-colors duration-300"
+                  className="text-xs text-cream/70 hover:text-cream/90 transition-colors duration-300"
                 >
                   Instagram
                 </a>
@@ -62,7 +62,7 @@ export default function Footer() {
                   href="https://linkedin.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs text-cream/50 hover:text-cream/80 transition-colors duration-300"
+                  className="text-xs text-cream/70 hover:text-cream/90 transition-colors duration-300"
                 >
                   LinkedIn
                 </a>
@@ -70,7 +70,7 @@ export default function Footer() {
               <li>
                 <a
                   href="mailto:hola@catalinavillafane.com"
-                  className="text-xs text-cream/50 hover:text-cream/80 transition-colors duration-300"
+                  className="text-xs text-cream/70 hover:text-cream/90 transition-colors duration-300"
                 >
                   hola@catalinavillafane.com
                 </a>
@@ -81,12 +81,12 @@ export default function Footer() {
 
         {/* Bottom */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-3 pt-6">
-          <p className="text-[0.65rem] text-cream/30 tracking-wide">
+          <p className="text-[0.65rem] text-cream/50 tracking-wide">
             &copy; 2026 Catalina Villafañe. Todos los derechos reservados.
           </p>
           <a
             href="#"
-            className="text-[0.65rem] text-cream/30 hover:text-cream/50 transition-colors tracking-wide"
+            className="text-[0.65rem] text-cream/50 hover:text-cream/50 transition-colors tracking-wide"
           >
             Política de privacidad
           </a>

@@ -64,12 +64,12 @@ export default function Proposito() {
               visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
             }`}
           >
-            <p className="text-cream/60 text-sm md:text-base font-light leading-relaxed">
+            <p className="text-cream/85 text-sm md:text-base font-light leading-relaxed">
               Creo en negocios construidos con base sólida, donde la estrategia
               no está separada de los valores, y donde crecer no significa perder
               el rumbo.
             </p>
-            <p className="text-cream/60 text-sm md:text-base font-light leading-relaxed">
+            <p className="text-cream/85 text-sm md:text-base font-light leading-relaxed">
               Mi trabajo es acompañarte a tomar decisiones más claras, ordenar lo
               que ya tenés y avanzar con dirección. Porque el poder de crear ya
               está en vos.

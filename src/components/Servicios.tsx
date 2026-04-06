@@ -1,6 +1,17 @@
 import Image from "next/image";
 import ScrollReveal from "./ScrollReveal";
 
+const charlasImages = [
+  { src: "/images/charla2.webp", w: 800, h: 533 },
+  { src: "/images/charla3.webp", w: 800, h: 532 },
+  { src: "/images/charla4.webp", w: 800, h: 1199 },
+  { src: "/images/charla5.webp", w: 800, h: 1422 },
+  { src: "/images/charla6.webp", w: 800, h: 532 },
+  { src: "/images/charla7.webp", w: 800, h: 532 },
+  { src: "/images/charla8.webp", w: 800, h: 1200 },
+  { src: "/images/charla9.webp", w: 800, h: 1422 },
+];
+
 export default function Servicios() {
   return (
     <section id="servicios" className="bg-cream py-20 md:py-32 px-6 md:px-12 lg:px-20">
@@ -16,7 +27,7 @@ export default function Servicios() {
           </h2>
         </ScrollReveal>
 
-        {/* Featured — Virtuosa */}
+        {/* 01 — Virtuosa (full-width) */}
         <ScrollReveal className="mb-6">
           <div className="group relative overflow-hidden min-h-[320px] sm:min-h-[380px] md:min-h-[420px] flex items-end">
             <Image
@@ -35,17 +46,17 @@ export default function Servicios() {
                 <h3 className="font-serif text-3xl md:text-4xl font-normal text-white mb-4 leading-tight">
                   Virtuosa
                 </h3>
-                <p className="text-sm md:text-base text-cream/90 font-light leading-relaxed mb-3">
-                  El poder de crear ya está en vos. Es hora de activarlo.
+                <p className="font-serif text-lg md:text-xl italic text-cream mb-3 leading-snug">
+                  Es hora de <span className="font-script text-gold not-italic">dar el próximo paso.</span>
                 </p>
-                <p className="text-sm md:text-base text-cream/70 font-light leading-relaxed mb-3">
+                <p className="text-sm md:text-base text-cream/80 font-light leading-relaxed mb-3">
                   Si ya empezaste pero tu negocio está estancado o desordenado,
                   este programa te ayuda a recuperar claridad y definir estrategia
                   para crear con base sólida.
                 </p>
-                <p className="text-sm md:text-base text-cream/70 font-light leading-relaxed mb-3">
+                <p className="text-sm md:text-base text-cream/80 font-light leading-relaxed mb-3">
                   Vas a definir y avanzar con lo que tenés que hacer y dejar de
-                  hacer para dar primeros pasos y vender.
+                  hacer para dar el próximo paso y vender.
                 </p>
                 <p className="text-xs tracking-wider uppercase text-gold/80 font-medium">
                   4 módulos prácticos &middot; 2 horas de pura estrategia, mentalidad y acción
@@ -63,8 +74,8 @@ export default function Servicios() {
           </div>
         </ScrollReveal>
 
-        {/* Secondary — Mentoría & Charlas */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* 02 & 03 — Mentorías (2 columnas) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
           <ScrollReveal delay={100}>
             <div className="group p-8 md:p-10 bg-navy border border-navy h-full flex flex-col transition-all duration-500 hover:shadow-2xl hover:shadow-navy/20">
               <p className="font-serif text-5xl font-light leading-none mb-5 text-white/10 group-hover:text-white/15 transition-colors duration-500">
@@ -74,7 +85,7 @@ export default function Servicios() {
                 1 a 1
               </p>
               <h3 className="font-serif text-2xl font-normal text-white mb-4 leading-tight">
-                Mentoría
+                Mentoría Individual
               </h3>
               <p className="text-sm text-cream/70 font-light leading-relaxed mb-4 flex-1">
                 Espacio privado para emprendedoras que quieran mirar su negocio,
@@ -97,31 +108,118 @@ export default function Servicios() {
           </ScrollReveal>
 
           <ScrollReveal delay={200}>
-            <div className="group p-8 md:p-10 bg-white border border-beige/60 h-full flex flex-col transition-all duration-500 hover:shadow-xl hover:shadow-beige/40 hover:border-gold/30">
-              <p className="font-serif text-5xl font-light leading-none mb-5 text-beige group-hover:text-gold/30 transition-colors duration-500">
+            <div className="group p-8 md:p-10 bg-navy border border-navy h-full flex flex-col transition-all duration-500 hover:shadow-2xl hover:shadow-navy/20">
+              <p className="font-serif text-5xl font-light leading-none mb-5 text-white/10 group-hover:text-white/15 transition-colors duration-500">
                 03
               </p>
               <p className="text-[0.68rem] tracking-[0.14em] uppercase text-gold mb-2">
-                Eventos
+                Grupal
               </p>
-              <h3 className="font-serif text-2xl font-normal text-navy mb-4 leading-tight">
-                Charlas y Talleres
+              <h3 className="font-serif text-2xl font-normal text-white mb-4 leading-tight">
+                Mentoría Grupal
               </h3>
-              <p className="text-sm text-gray-500 font-light leading-relaxed mb-8 flex-1">
-                Liderazgo, comunicación, equipos de alto rendimiento, gestión de
-                proyectos exitosos. Temáticas adaptables a tu equipo o evento.
-                Consultoría corporativa disponible.
+              <p className="text-sm text-cream/70 font-light leading-relaxed mb-4 flex-1">
+                Un espacio de crecimiento compartido donde emprendedoras se
+                encuentran para aprender, desafiarse y avanzar juntas. Estrategia
+                colectiva con la guía y el acompañamiento personalizado de Cata.
+              </p>
+              <p className="text-sm text-cream/55 font-light leading-relaxed mb-8">
+                Grupos reducidos para garantizar atención y resultados reales.
               </p>
               <a
                 href="#contacto"
-                className="inline-flex items-center gap-2 text-xs font-medium tracking-wider uppercase text-navy transition-all duration-300 group-hover:gap-3"
+                className="inline-flex items-center gap-2 text-xs font-medium tracking-wider uppercase text-gold transition-all duration-300 group-hover:gap-3"
               >
-                Consultar disponibilidad
+                Consultar próximo grupo
                 <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
               </a>
             </div>
           </ScrollReveal>
         </div>
+
+        {/* 04 — Charlas y Talleres (full-width con carrusel de fotos) */}
+        <ScrollReveal>
+          <div className="bg-white border border-beige/60 overflow-hidden transition-all duration-500 hover:shadow-xl hover:shadow-beige/40">
+            {/* Content top */}
+            <div className="p-8 md:p-10 lg:p-14">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-start">
+                <div>
+                  <p className="text-[0.68rem] tracking-[0.14em] uppercase text-gold mb-2">
+                    04 &middot; Eventos
+                  </p>
+                  <h3 className="font-serif text-3xl md:text-4xl font-normal text-navy mb-4 leading-tight">
+                    Charlas y Talleres
+                  </h3>
+                  <p className="text-sm md:text-base text-gray-500 font-light leading-relaxed mb-6">
+                    Temáticas adaptables a tu equipo o evento.
+                    Consultoría corporativa disponible.
+                  </p>
+                  <a
+                    href="#contacto"
+                    className="inline-flex items-center gap-2 text-xs font-medium tracking-wider uppercase text-navy transition-all duration-300 hover:gap-3"
+                  >
+                    Consultar disponibilidad
+                    <span aria-hidden className="transition-transform duration-300">&rarr;</span>
+                  </a>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {["Liderazgo", "Comunicación", "Equipos de alto rendimiento", "Gestión de proyectos", "Transformación digital", "Estrategia comercial", "Mentalidad emprendedora"].map((tema) => (
+                    <span
+                      key={tema}
+                      className="text-[0.65rem] tracking-wider uppercase px-3 py-1.5 border border-beige text-navy/70 hover:border-gold/40 hover:text-navy transition-colors duration-300"
+                    >
+                      {tema}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Photo marquee */}
+            <div className="group/marquee relative">
+              <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+              <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+
+              <div className="overflow-hidden">
+                <div className="flex items-center gap-4 animate-marquee-slow group-hover/marquee:[animation-play-state:paused]">
+                  {charlasImages.map((img, i) => {
+                    const height = 260;
+                    const width = Math.round((img.w / img.h) * height);
+                    return (
+                      <div key={i} className="shrink-0 overflow-hidden" style={{ width, height }}>
+                        <Image
+                          src={img.src}
+                          alt={`Charla ${i + 1}`}
+                          width={width}
+                          height={height}
+                          className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                          sizes={`${width}px`}
+                        />
+                      </div>
+                    );
+                  })}
+                  {/* Duplicate for seamless loop */}
+                  {charlasImages.map((img, i) => {
+                    const height = 260;
+                    const width = Math.round((img.w / img.h) * height);
+                    return (
+                      <div key={`dup-${i}`} className="shrink-0 overflow-hidden" style={{ width, height }}>
+                        <Image
+                          src={img.src}
+                          alt={`Charla ${i + 1}`}
+                          width={width}
+                          height={height}
+                          className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                          sizes={`${width}px`}
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          </div>
+        </ScrollReveal>
       </div>
     </section>
   );
