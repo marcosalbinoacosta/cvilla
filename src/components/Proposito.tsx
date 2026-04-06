@@ -34,13 +34,13 @@ export default function Proposito() {
         <div className="py-20 md:py-32 px-6 md:px-12 lg:px-20 relative z-10">
           {/* Animated gold line top */}
           <div
-            className={`h-px bg-gradient-to-r from-gold to-transparent mb-10 transition-all duration-1000 ease-out ${
+            className={`h-px bg-gradient-to-r from-gold-light to-transparent mb-10 transition-all duration-1000 ease-out ${
               visible ? "w-24 opacity-100" : "w-0 opacity-0"
             }`}
           />
 
           <p
-            className={`text-[0.7rem] tracking-[0.2em] uppercase text-gold/80 mb-8 transition-all duration-700 ${
+            className={`text-[0.7rem] tracking-[0.2em] uppercase text-gold-light mb-8 transition-all duration-700 ${
               visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
           >
@@ -54,7 +54,7 @@ export default function Proposito() {
           >
             Ayudar a pymes y emprendedores
             <br className="hidden md:block" /> a crecer con{" "}
-            <span className="font-script text-gold not-italic">
+            <span className="font-script text-gold-light not-italic">
               principios.
             </span>
           </p>
@@ -78,7 +78,7 @@ export default function Proposito() {
 
           {/* Animated gold line bottom */}
           <div
-            className={`h-px bg-gradient-to-r from-gold to-transparent mt-10 transition-all duration-1000 delay-700 ease-out ${
+            className={`h-px bg-gradient-to-r from-gold-light to-transparent mt-10 transition-all duration-1000 delay-700 ease-out ${
               visible ? "w-24 opacity-100" : "w-0 opacity-0"
             }`}
           />

@@ -5,14 +5,15 @@
   --color-cream: #F7F2EC;
   --color-beige: #EDE4D8;
   --color-gold: #B87B6A;
+  --color-gold-light: #D4A494;
   --color-text: #2C2C2C;
   --font-serif: "Cormorant Garamond", Georgia, serif;
   --font-sans: "Inter", system-ui, sans-serif;
   --font-script: "Dancing Script", cursive;
   --animate-fade-up: fade-up 0.7s ease-out both;
   --animate-fade-in: fade-in 0.6s ease-out both;
-  --animate-marquee: marquee 40s linear infinite;
-  --animate-marquee-slow: marquee 50s linear infinite;
+  --animate-marquee: marquee 20s linear infinite;
+  --animate-marquee-slow: marquee 25s linear infinite;
 }
 
 @keyframes fade-up {

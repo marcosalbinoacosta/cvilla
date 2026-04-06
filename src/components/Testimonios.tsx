@@ -52,7 +52,7 @@ function TestimonioCard({ t }: { t: (typeof testimonios)[number] }) {
   return (
     <div className="w-[340px] md:w-[400px] shrink-0">
       <div className="bg-white/10 backdrop-blur-sm p-8 md:p-10 border border-cream/10 h-full flex flex-col transition-all duration-500 hover:bg-white/15 hover:border-gold/20">
-        <span className="font-serif text-5xl text-gold/40 leading-none mb-4">
+        <span className="font-serif text-5xl text-gold-light/40 leading-none mb-4">
           &ldquo;
         </span>
         <p className="font-serif text-base md:text-lg italic text-cream/90 leading-relaxed flex-1">
@@ -70,7 +70,7 @@ function TestimonioCard({ t }: { t: (typeof testimonios)[number] }) {
           )}
           <div>
             <p className="text-sm font-medium text-cream">{t.name}</p>
-            <p className="text-xs text-gold tracking-wider uppercase mt-0.5">
+            <p className="text-xs text-gold-light tracking-wider uppercase mt-0.5">
               {t.role}
             </p>
           </div>
@@ -97,12 +97,12 @@ export default function Testimonios() {
 
       <div className="relative z-10">
         <ScrollReveal className="text-center mb-16 px-6">
-          <p className="text-[0.72rem] tracking-[0.18em] uppercase text-gold mb-3">
+          <p className="text-[0.72rem] tracking-[0.18em] uppercase text-gold-light mb-3">
             Testimonios
           </p>
           <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-light text-cream">
             Historias de{" "}
-            <span className="font-script text-gold">transformación</span>
+            <span className="font-script text-gold-light">transformación</span>
           </h2>
         </ScrollReveal>
 

@@ -17,16 +17,16 @@ export default function CtaBanner() {
       </div>
 
       <ScrollReveal className="max-w-3xl mx-auto text-center relative z-10 px-6">
-        <p className="text-[0.72rem] tracking-[0.18em] uppercase text-gold/80 mb-6">
+        <p className="text-[0.72rem] tracking-[0.18em] uppercase text-gold-light mb-6">
           Da el próximo paso
         </p>
         <p className="font-serif text-2xl md:text-3xl lg:text-4xl font-light italic text-cream leading-snug mb-6">
           Tu negocio merece crecer con{" "}
-          <span className="font-script text-gold not-italic">
+          <span className="font-script text-gold-light not-italic">
             dirección
           </span>{" "}
           y{" "}
-          <span className="font-script text-gold not-italic">
+          <span className="font-script text-gold-light not-italic">
             propósito.
           </span>
         </p>

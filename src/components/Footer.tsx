@@ -8,7 +8,7 @@ export default function Footer() {
           <div>
             <p className="font-serif text-xl text-cream font-light mb-3">
               Catalina{" "}
-              <span className="font-script text-gold text-2xl">Villafañe</span>
+              <span className="font-script text-gold-light text-2xl">Villafañe</span>
             </p>
             <p className="text-xs text-cream/60 leading-relaxed max-w-xs">
               Consultora &amp; Mentora de Negocios. Ayudo a pymes y
@@ -18,7 +18,7 @@ export default function Footer() {
 
           {/* Navigation */}
           <div>
-            <p className="text-[0.68rem] tracking-[0.14em] uppercase text-gold mb-4 font-medium">
+            <p className="text-[0.68rem] tracking-[0.14em] uppercase text-gold-light mb-4 font-medium">
               Navegación
             </p>
             <ul className="space-y-2.5">
@@ -43,7 +43,7 @@ export default function Footer() {
 
           {/* Social & contact */}
           <div>
-            <p className="text-[0.68rem] tracking-[0.14em] uppercase text-gold mb-4 font-medium">
+            <p className="text-[0.68rem] tracking-[0.14em] uppercase text-gold-light mb-4 font-medium">
               Conectemos
             </p>
             <ul className="space-y-2.5">

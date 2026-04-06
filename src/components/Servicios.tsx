@@ -40,34 +40,34 @@ export default function Servicios() {
 
             <div className="relative z-10 p-6 md:p-8 lg:p-14 w-full grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-10 lg:gap-16 items-end">
               <div>
-                <p className="text-[0.68rem] tracking-[0.14em] uppercase text-gold mb-2">
+                <p className="text-sm tracking-[0.14em] uppercase text-cream/90 mb-2 font-medium">
                   01 &middot; Programa
                 </p>
-                <h3 className="font-serif text-3xl md:text-4xl font-normal text-white mb-4 leading-tight">
+                <h3 className="font-serif text-3xl md:text-4xl lg:text-5xl font-normal text-white mb-4 leading-tight">
                   Virtuosa
                 </h3>
-                <p className="font-serif text-lg md:text-xl italic text-cream mb-3 leading-snug">
-                  Es hora de <span className="font-script text-gold not-italic">dar el próximo paso.</span>
+                <p className="font-serif text-xl md:text-2xl lg:text-3xl italic text-cream mb-5 leading-snug">
+                  Es hora de <span className="font-script text-gold-light not-italic">dar el próximo paso.</span>
+                </p>
+                <p className="text-sm md:text-base tracking-wider uppercase text-gold-light font-medium mb-5">
+                  4 módulos prácticos &middot; 2 horas de pura estrategia, mentalidad y acción
                 </p>
                 <p className="text-sm md:text-base text-cream/80 font-light leading-relaxed mb-3">
                   Si ya empezaste pero tu negocio está estancado o desordenado,
                   este programa te ayuda a recuperar claridad y definir estrategia
                   para crear con base sólida.
                 </p>
-                <p className="text-sm md:text-base text-cream/80 font-light leading-relaxed mb-3">
+                <p className="text-sm md:text-base text-cream/80 font-light leading-relaxed mb-5">
                   Vas a definir y avanzar con lo que tenés que hacer y dejar de
                   hacer para dar el próximo paso y vender.
-                </p>
-                <p className="text-xs tracking-wider uppercase text-gold/80 font-medium">
-                  4 módulos prácticos &middot; 2 horas de pura estrategia, mentalidad y acción
                 </p>
               </div>
               <div className="md:text-right">
                 <a
                   href="#"
-                  className="inline-block bg-gold text-white text-xs font-medium uppercase tracking-widest px-8 py-4 hover:bg-gold/85 transition-all duration-300 hover:shadow-lg hover:shadow-gold/30"
+                  className="inline-block bg-gold text-white text-xs md:text-sm font-medium uppercase tracking-widest px-8 py-4 hover:bg-gold/85 transition-all duration-300 hover:shadow-lg hover:shadow-gold/30"
                 >
-                  Comprar el programa
+                  Da el próximo paso
                 </a>
               </div>
             </div>
@@ -81,7 +81,7 @@ export default function Servicios() {
               <p className="font-serif text-5xl font-light leading-none mb-5 text-white/10 group-hover:text-white/15 transition-colors duration-500">
                 02
               </p>
-              <p className="text-[0.68rem] tracking-[0.14em] uppercase text-gold mb-2">
+              <p className="text-[0.68rem] tracking-[0.14em] uppercase text-gold-light mb-2">
                 1 a 1
               </p>
               <h3 className="font-serif text-2xl font-normal text-white mb-4 leading-tight">
@@ -99,7 +99,7 @@ export default function Servicios() {
               </p>
               <a
                 href="#contacto"
-                className="inline-flex items-center gap-2 text-xs font-medium tracking-wider uppercase text-gold transition-all duration-300 group-hover:gap-3"
+                className="inline-flex items-center gap-2 text-xs font-medium tracking-wider uppercase text-gold-light transition-all duration-300 group-hover:gap-3"
               >
                 Sumarme a la lista
                 <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
@@ -112,7 +112,7 @@ export default function Servicios() {
               <p className="font-serif text-5xl font-light leading-none mb-5 text-white/10 group-hover:text-white/15 transition-colors duration-500">
                 03
               </p>
-              <p className="text-[0.68rem] tracking-[0.14em] uppercase text-gold mb-2">
+              <p className="text-[0.68rem] tracking-[0.14em] uppercase text-gold-light mb-2">
                 Grupal
               </p>
               <h3 className="font-serif text-2xl font-normal text-white mb-4 leading-tight">
@@ -128,7 +128,7 @@ export default function Servicios() {
               </p>
               <a
                 href="#contacto"
-                className="inline-flex items-center gap-2 text-xs font-medium tracking-wider uppercase text-gold transition-all duration-300 group-hover:gap-3"
+                className="inline-flex items-center gap-2 text-xs font-medium tracking-wider uppercase text-gold-light transition-all duration-300 group-hover:gap-3"
               >
                 Consultar próximo grupo
                 <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
