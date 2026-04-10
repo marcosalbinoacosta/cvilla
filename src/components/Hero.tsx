@@ -81,7 +81,7 @@ export default function Hero() {
               crecen con
             </span>{" "}
             <span
-              className={`inline-block font-script text-shimmer text-5xl md:text-6xl lg:text-7xl not-italic transition-all duration-700 py-2 -my-2 px-1 -mx-1 ${
+              className={`inline-block font-script text-shimmer text-5xl md:text-6xl lg:text-7xl not-italic transition-all duration-700 ${
                 loaded ? "opacity-100 translate-y-0 blur-0" : "opacity-0 translate-y-8 blur-sm"
               }`}
               style={{ transitionDelay: "300ms" }}

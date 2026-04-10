@@ -186,6 +186,12 @@ body {
   -webkit-backdrop-filter: blur(12px) saturate(180%);
 }
 
+/* Script font clipping fix — Dancing Script ascenders/descenders get clipped */
+.font-script {
+  padding: 0.15em 0.05em;
+  margin: -0.15em -0.05em;
+}
+
 /* Text gradient shimmer */
 .text-shimmer {
   background: linear-gradient(
@@ -199,6 +205,8 @@ body {
   background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: shimmer 4s ease-in-out infinite;
+  padding: 0.15em 0.05em;
+  margin: -0.15em -0.05em;
 }
 
 /* 3D card tilt on hover */
