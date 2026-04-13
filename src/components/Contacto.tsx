@@ -4,7 +4,13 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import ScrollReveal from "./ScrollReveal";
 
-export default function Contacto() {
+type ContactoData = {
+  email?: string;
+  whatsapp?: string;
+  ubicacion?: string;
+};
+
+export default function Contacto({ data }: { data?: ContactoData }) {
   const formRef = useRef<HTMLFormElement>(null);
   const [formVisible, setFormVisible] = useState(false);
 
@@ -32,7 +38,7 @@ export default function Contacto() {
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-20 items-start">
         {/* Left — text content */}
         <ScrollReveal animation="slide-right">
-          <p className="text-[0.72rem] tracking-[0.18em] uppercase text-navy/60 mb-3">
+          <p className="text-[0.72rem] tracking-[0.18em] uppercase text-navy/75 mb-3">
             Contacto
           </p>
           <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-light text-navy mb-4">
@@ -41,7 +47,7 @@ export default function Contacto() {
           <p className="font-serif italic text-base md:text-lg text-gray-400 mb-8">
             Contame en qué estás trabajando y cómo puedo ayudarte.
           </p>
-          <div className="space-y-4 text-sm text-navy/70 font-light">
+          <div className="space-y-4 text-sm text-navy/80 font-light">
             <div className="flex items-center gap-3 group">
               <svg
                 viewBox="0 0 24 24"
@@ -56,7 +62,7 @@ export default function Contacto() {
                   strokeLinejoin="round"
                 />
               </svg>
-              <span>hola@catalinavillafane.com</span>
+              <span>{data?.email || "hola@catalinavillafane.com"}</span>
             </div>
             <div className="flex items-center gap-3 group">
               <svg
@@ -77,7 +83,7 @@ export default function Contacto() {
                   strokeLinejoin="round"
                 />
               </svg>
-              <span>Córdoba, Argentina</span>
+              <span>{data?.ubicacion || "Córdoba, Argentina"}</span>
             </div>
           </div>
         </ScrollReveal>
@@ -94,7 +100,7 @@ export default function Contacto() {
               >
                 <label
                   htmlFor="nombre"
-                  className="block text-xs tracking-wider uppercase text-navy/60 mb-2"
+                  className="block text-xs tracking-wider uppercase text-navy/75 mb-2"
                 >
                   Nombre
                 </label>
@@ -113,7 +119,7 @@ export default function Contacto() {
               >
                 <label
                   htmlFor="email"
-                  className="block text-xs tracking-wider uppercase text-navy/60 mb-2"
+                  className="block text-xs tracking-wider uppercase text-navy/75 mb-2"
                 >
                   Email
                 </label>
@@ -133,7 +139,7 @@ export default function Contacto() {
             >
               <label
                 htmlFor="mensaje"
-                className="block text-xs tracking-wider uppercase text-navy/60 mb-2"
+                className="block text-xs tracking-wider uppercase text-navy/75 mb-2"
               >
                 Mensaje
               </label>
@@ -186,7 +192,7 @@ export default function Contacto() {
               &ldquo;No nos cansemos, pues, de hacer bien; porque a su tiempo
               segaremos, si no desmayamos.&rdquo;
             </p>
-            <cite className="text-xs tracking-[0.18em] uppercase text-navy/50 not-italic">
+            <cite className="text-xs tracking-[0.18em] uppercase text-navy/70 not-italic">
               Gálatas 6:9
             </cite>
           </blockquote>

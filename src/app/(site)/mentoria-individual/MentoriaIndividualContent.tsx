@@ -97,7 +97,7 @@ function FormIndividual() {
 
       <div className="space-y-5 mb-6">
         <div>
-          <label htmlFor="ind-nombre" className="block text-xs tracking-wider uppercase text-navy/60 mb-2">
+          <label htmlFor="ind-nombre" className="block text-xs tracking-wider uppercase text-navy/75 mb-2">
             Nombre
           </label>
           <input
@@ -111,7 +111,7 @@ function FormIndividual() {
         </div>
 
         <div>
-          <label htmlFor="ind-email" className="block text-xs tracking-wider uppercase text-navy/60 mb-2">
+          <label htmlFor="ind-email" className="block text-xs tracking-wider uppercase text-navy/75 mb-2">
             Email
           </label>
           <input
@@ -125,7 +125,7 @@ function FormIndividual() {
         </div>
 
         <div>
-          <label htmlFor="ind-etapa" className="block text-xs tracking-wider uppercase text-navy/60 mb-2">
+          <label htmlFor="ind-etapa" className="block text-xs tracking-wider uppercase text-navy/75 mb-2">
             ¿En qué etapa está tu negocio?
           </label>
           <select
@@ -144,7 +144,7 @@ function FormIndividual() {
         </div>
 
         <div>
-          <label htmlFor="ind-expectativa" className="block text-xs tracking-wider uppercase text-navy/60 mb-2">
+          <label htmlFor="ind-expectativa" className="block text-xs tracking-wider uppercase text-navy/75 mb-2">
             ¿Qué esperás de la mentoría?
           </label>
           <textarea
@@ -201,6 +201,7 @@ export default function MentoriaIndividualContent() {
                     loaded ? "scale-100 opacity-100" : "scale-110 opacity-0"
                   }`}
                   priority
+                  fetchPriority="high"
                   sizes="(max-width: 768px) 100vw, 50vw"
                   quality={95}
                 />
@@ -217,7 +218,7 @@ export default function MentoriaIndividualContent() {
                 }`}
               />
               <p
-                className={`text-[0.72rem] tracking-[0.2em] uppercase text-navy/50 mb-4 transition-all duration-700 ${
+                className={`text-[0.72rem] tracking-[0.2em] uppercase text-navy/70 mb-4 transition-all duration-700 ${
                   loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
                 }`}
               >
@@ -235,7 +236,7 @@ export default function MentoriaIndividualContent() {
                 </span>
               </h1>
               <p
-                className={`font-serif text-lg md:text-xl italic text-navy/60 max-w-lg leading-snug mb-8 transition-all duration-700 ${
+                className={`font-serif text-lg md:text-xl italic text-navy/75 max-w-lg leading-snug mb-8 transition-all duration-700 ${
                   loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
                 }`}
                 style={{ transitionDelay: "300ms" }}
@@ -261,7 +262,7 @@ export default function MentoriaIndividualContent() {
           <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-start">
             {/* Left — qué incluye */}
             <ScrollReveal animation="slide-right">
-              <p className="text-[0.72rem] tracking-[0.18em] uppercase text-navy/50 mb-3">
+              <p className="text-[0.72rem] tracking-[0.18em] uppercase text-navy/70 mb-3">
                 ¿Qué incluye?
               </p>
               <h2 className="font-serif text-2xl md:text-3xl font-light text-navy leading-tight mb-8">
@@ -280,7 +281,7 @@ export default function MentoriaIndividualContent() {
                   </div>
                 ))}
               </div>
-              <p className="text-sm text-navy/50 font-light italic">
+              <p className="text-sm text-navy/70 font-light italic">
                 La primera conversación es sin compromiso.
               </p>
             </ScrollReveal>

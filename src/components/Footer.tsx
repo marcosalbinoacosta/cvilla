@@ -2,7 +2,13 @@
 
 import { useEffect, useRef, useState } from "react";
 
-export default function Footer() {
+type FooterData = {
+  email?: string;
+  instagram?: string;
+  linkedin?: string;
+};
+
+export default function Footer({ data }: { data?: FooterData }) {
   const ref = useRef<HTMLElement>(null);
   const [visible, setVisible] = useState(false);
 
@@ -88,7 +94,7 @@ export default function Footer() {
             <ul className="space-y-2.5">
               <li>
                 <a
-                  href="https://instagram.com"
+                  href={data?.instagram || "https://instagram.com"}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-xs text-cream/70 hover:text-cream/90 transition-colors duration-300"
@@ -98,7 +104,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="https://linkedin.com"
+                  href={data?.linkedin || "https://linkedin.com"}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-xs text-cream/70 hover:text-cream/90 transition-colors duration-300"
@@ -108,10 +114,10 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="mailto:hola@catalinavillafane.com"
+                  href={`mailto:${data?.email || "hola@catalinavillafane.com"}`}
                   className="text-xs text-cream/70 hover:text-cream/90 transition-colors duration-300"
                 >
-                  hola@catalinavillafane.com
+                  {data?.email || "hola@catalinavillafane.com"}
                 </a>
               </li>
             </ul>

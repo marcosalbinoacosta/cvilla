@@ -46,6 +46,7 @@ export default function Hero() {
                 loaded ? "scale-100 opacity-100" : "scale-110 opacity-0"
               }`}
               priority
+              fetchPriority="high"
               sizes="(max-width: 768px) 100vw, 900px"
             />
           </div>
@@ -100,7 +101,7 @@ export default function Hero() {
           </h1>
 
           <p
-            className={`font-serif text-lg md:text-xl italic text-navy/60 mb-10 transition-all duration-700 ${
+            className={`font-serif text-lg md:text-xl italic text-navy/75 mb-10 transition-all duration-700 ${
               loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
             }`}
             style={{ transitionDelay: "550ms" }}

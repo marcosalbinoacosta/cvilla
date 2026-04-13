@@ -4,13 +4,15 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import ScrollReveal from "./ScrollReveal";
 
-const expertise = [
-  "Estrategia Empresarial",
-  "Diseño de Procesos",
-  "Liderazgo Consciente",
-  "Gestión del Tiempo",
-  "Transformación Digital",
-];
+type SobreMiData = {
+  nombre: string;
+  saludo: string;
+  titulo: string;
+  cita: string;
+  fotoUrl?: string;
+  expertise: string[];
+  anosExperiencia: number;
+};
 
 function AnimatedCounter({ target, suffix = "" }: { target: number; suffix?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
@@ -52,34 +54,31 @@ function AnimatedCounter({ target, suffix = "" }: { target: number; suffix?: str
   return <span ref={ref}>+{count}{suffix}</span>;
 }
 
-export default function SobreMi() {
+export default function SobreMi({ data }: { data: SobreMiData }) {
   return (
     <section
       id="sobre-mi"
       className="bg-cream py-24 lg:py-32 px-6 md:px-12 lg:px-20"
     >
       <div className="max-w-7xl mx-auto flex flex-col-reverse lg:flex-row gap-16 lg:gap-24 items-center">
-        {/* Photo side — 5/12 */}
+        {/* Photo side */}
         <ScrollReveal animation="slide-right" className="w-full lg:w-5/12">
           <div className="relative">
-            {/* Beige offset background */}
             <div className="absolute -top-6 -left-6 md:-top-10 md:-left-10 w-full h-[90%] bg-beige hidden md:block" />
-
-            {/* Accent corner */}
             <div className="absolute bottom-0 right-0 w-40 h-40 border-t border-l border-accent/30 pointer-events-none hidden md:block" />
 
-            {/* Main image */}
-            <Image
-              src="/images/sobre-mi-new.webp"
-              alt="Catalina Villafañe"
-              width={600}
-              height={750}
-              className="w-full h-auto aspect-[4/5] object-cover relative z-10 shadow-2xl"
-              sizes="(max-width: 768px) 100vw, 40vw"
-              quality={90}
-            />
+            {data.fotoUrl && (
+              <Image
+                src={data.fotoUrl}
+                alt={data.nombre}
+                width={600}
+                height={750}
+                className="w-full h-auto aspect-[4/5] object-cover relative z-10 shadow-2xl"
+                sizes="(max-width: 768px) 100vw, 40vw"
+                quality={90}
+              />
+            )}
 
-            {/* Floating badge */}
             <div className="absolute bottom-10 -right-4 md:-right-16 lg:-right-24 z-20 bg-white shadow-xl border border-beige px-5 py-4 flex items-center gap-3 animate-float">
               <svg viewBox="0 0 24 24" fill="none" className="w-8 h-8 text-accent shrink-0">
                 <path
@@ -89,9 +88,9 @@ export default function SobreMi() {
               </svg>
               <div>
                 <p className="font-serif text-xl font-semibold text-navy leading-none">
-                  <AnimatedCounter target={10} /> Años
+                  <AnimatedCounter target={data.anosExperiencia} /> Años
                 </p>
-                <p className="text-[0.65rem] tracking-wider uppercase text-navy/50 mt-0.5">
+                <p className="text-[0.65rem] tracking-wider uppercase text-navy/70 mt-0.5">
                   Transformando negocios
                 </p>
               </div>
@@ -99,9 +98,8 @@ export default function SobreMi() {
           </div>
         </ScrollReveal>
 
-        {/* Content side — 7/12 */}
+        {/* Content side */}
         <div className="w-full lg:w-7/12">
-          {/* Greeting */}
           <ScrollReveal animation="slide-left">
             <h2 className="font-serif text-3xl md:text-4xl font-light text-navy leading-tight mb-2">
               Hola,
@@ -111,12 +109,11 @@ export default function SobreMi() {
                 Cata
               </span>
             </h2>
-            <p className="font-serif text-xl md:text-2xl font-light text-navy/70 italic mb-8">
-              Trazando el camino de tu expansión
+            <p className="font-serif text-xl md:text-2xl font-light text-navy/80 italic mb-8">
+              {data.titulo}
             </p>
           </ScrollReveal>
 
-          {/* Description */}
           <ScrollReveal animation="slide-left" delay={100}>
             <p className="text-base lg:text-lg text-text/80 font-light leading-relaxed mb-4">
               Licenciada con años de experiencia acompañando pymes y
@@ -132,7 +129,6 @@ export default function SobreMi() {
             </p>
           </ScrollReveal>
 
-          {/* Quote block */}
           <ScrollReveal animation="slide-left" delay={200}>
             <div className="border-y border-beige py-6 mb-8 flex items-start gap-4">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-7 h-7 text-navy shrink-0 mt-1">
@@ -140,21 +136,19 @@ export default function SobreMi() {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
               </svg>
               <p className="font-serif text-xl md:text-2xl italic text-accent leading-snug">
-                &ldquo;Un negocio ordenado multiplica su impacto y le devuelve
-                tiempo y paz a su líder.&rdquo;
+                &ldquo;{data.cita}&rdquo;
               </p>
             </div>
           </ScrollReveal>
 
-          {/* Areas of expertise */}
           <ScrollReveal animation="slide-left" delay={300}>
-            <p className="text-xs tracking-widest uppercase font-semibold text-navy/60 mb-4">
+            <p className="text-xs tracking-widest uppercase font-semibold text-navy/75 mb-4">
               Áreas de expertise
             </p>
           </ScrollReveal>
           <ScrollReveal animation="stagger" delay={300}>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {expertise.map((item) => (
+              {data.expertise?.map((item) => (
                 <div key={item} className="flex items-center gap-2.5">
                   <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4 text-accent shrink-0">
                     <path

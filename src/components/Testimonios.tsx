@@ -4,52 +4,17 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import ScrollReveal from "./ScrollReveal";
 
-const testimonios = [
-  {
-    quote:
-      "Fue un proceso de transformación para mi negocio. En cada encuentro pude conocer nuevas herramientas, diseñar mis objetivos y me regalaste una mirada nueva sobre mi negocio.",
-    name: "Lic. Sabrina Peña",
-    role: "Asesora en capacitación",
-    image: "/images/testimonio-1.webp",
-  },
-  {
-    quote:
-      "Nos ayudó a ordenar nuestro negocio y darnos cuenta de todo lo que no sabíamos. Es una persona muy clara, firme y siempre enfocada hacia adelante.",
-    name: "Brenda Ayen",
-    role: "Carlos Ayen Joyas",
-    image: "/images/testimonio-2.webp",
-  },
-  {
-    quote:
-      "Me ayudó a entender la importancia del valor de mi producto. Hoy tengo una mirada completamente distinta de mi negocio. Se los recomiendo porque realmente vale la pena.",
-    name: "Florencia",
-    role: "Diseño de moda",
-    image: "/images/testimonio-3.webp",
-  },
-  {
-    quote:
-      "Es súper atenta, me escuchó y me dio herramientas para ordenar mi negocio. Ahora trabajo más enfocada y mis ideas se van convirtiendo en resultados.",
-    name: "Gina Bazan",
-    role: "Emprendedora gastronómica",
-    image: "/images/testimonio-4.webp",
-  },
-  {
-    quote:
-      "Me ayudó a darle forma a mi negocio y a trabajar de manera estratégica. Es una persona comprometida, clara y con una energía que te impulsa a avanzar.",
-    name: "Gisela Caffaro",
-    role: "Consultora en CX",
-    image: "/images/testimonio-5.webp",
-  },
-  {
-    quote:
-      "Transformó mi manera de ver y llevar adelante mi negocio. Me dio herramientas concretas para planificar y organizarme. Un proceso de transformación que recomiendo muchísimo.",
-    name: "Alejandra Sil",
-    role: "Psicóloga",
-    image: "/images/testimonio-6.webp",
-  },
-];
+type Testimonio = {
+  _id: string;
+  nombre: string;
+  rol: string;
+  cita: string;
+  fotoUrl?: string;
+};
 
-function TestimonioCard({ t }: { t: (typeof testimonios)[number] }) {
+const CARD_SLOT = 400 + 32;
+
+function TestimonioCard({ t }: { t: Testimonio }) {
   return (
     <div className="w-[340px] md:w-[400px] shrink-0">
       <div className="bg-white/10 backdrop-blur-sm p-8 md:p-10 border border-cream/10 h-full flex flex-col transition-all duration-500 hover:bg-white/15 hover:border-accent-light/30 hover:-translate-y-1">
@@ -57,22 +22,22 @@ function TestimonioCard({ t }: { t: (typeof testimonios)[number] }) {
           &ldquo;
         </span>
         <p className="font-serif text-base md:text-lg italic text-cream/90 leading-relaxed flex-1">
-          {t.quote}
+          {t.cita}
         </p>
         <div className="mt-8 pt-6 border-t border-cream/10 flex items-center gap-4">
-          {t.image && (
+          {t.fotoUrl && (
             <Image
-              src={t.image}
-              alt={t.name}
+              src={t.fotoUrl}
+              alt={t.nombre}
               width={44}
               height={44}
               className="rounded-full object-cover w-11 h-11 ring-2 ring-accent-light/20"
             />
           )}
           <div>
-            <p className="text-sm font-medium text-cream">{t.name}</p>
+            <p className="text-sm font-medium text-cream">{t.nombre}</p>
             <p className="text-xs text-accent-light tracking-wider uppercase mt-0.5">
-              {t.role}
+              {t.rol}
             </p>
           </div>
         </div>
@@ -81,15 +46,12 @@ function TestimonioCard({ t }: { t: (typeof testimonios)[number] }) {
   );
 }
 
-// Card width (md) + gap = one card slot. 6 testimonios.
-const CARD_SLOT = 400 + 32; // w-[400px] + gap-8
-const ONE_SET_WIDTH = testimonios.length * CARD_SLOT;
-
-export default function Testimonios() {
+export default function Testimonios({ testimonios }: { testimonios: Testimonio[] }) {
   const bgRef = useRef<HTMLDivElement>(null);
   const [paused, setPaused] = useState(false);
 
-  // Parallax background
+  const oneSetWidth = testimonios.length * CARD_SLOT;
+
   useEffect(() => {
     const el = bgRef.current;
     if (!el) return;
@@ -107,7 +69,6 @@ export default function Testimonios() {
       id="testimonios"
       className="relative py-20 md:py-32 overflow-hidden"
     >
-      {/* Background image with parallax */}
       <div className="absolute inset-0 overflow-hidden">
         <div ref={bgRef} className="absolute inset-[-15%] will-change-transform">
           <Image
@@ -132,7 +93,6 @@ export default function Testimonios() {
           </h2>
         </ScrollReveal>
 
-        {/* Marquee — pauses on hover/touch */}
         <div
           className="relative"
           onMouseEnter={() => setPaused(true)}
@@ -140,7 +100,6 @@ export default function Testimonios() {
           onTouchStart={() => setPaused(true)}
           onTouchEnd={() => setPaused(false)}
         >
-          {/* Fade edges */}
           <div className="absolute left-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-r from-navy/90 to-transparent z-10 pointer-events-none" />
           <div className="absolute right-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-l from-navy/90 to-transparent z-10 pointer-events-none" />
 
@@ -150,16 +109,14 @@ export default function Testimonios() {
               style={{
                 animation: "marquee 40s linear infinite",
                 animationPlayState: paused ? "paused" : "running",
-                ["--marquee-offset" as string]: `-${ONE_SET_WIDTH}px`,
+                ["--marquee-offset" as string]: `-${oneSetWidth}px`,
               }}
             >
-              {/* Original set */}
               {testimonios.map((t) => (
-                <TestimonioCard key={t.name} t={t} />
+                <TestimonioCard key={t._id} t={t} />
               ))}
-              {/* Duplicate for seamless loop */}
               {testimonios.map((t) => (
-                <TestimonioCard key={`dup-${t.name}`} t={t} />
+                <TestimonioCard key={`dup-${t._id}`} t={t} />
               ))}
             </div>
           </div>

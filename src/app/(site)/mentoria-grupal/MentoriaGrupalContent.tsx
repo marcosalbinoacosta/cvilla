@@ -97,7 +97,7 @@ function FormGrupal() {
 
       <div className="space-y-5 mb-6">
         <div>
-          <label htmlFor="gru-nombre" className="block text-xs tracking-wider uppercase text-navy/60 mb-2">
+          <label htmlFor="gru-nombre" className="block text-xs tracking-wider uppercase text-navy/75 mb-2">
             Nombre
           </label>
           <input
@@ -111,7 +111,7 @@ function FormGrupal() {
         </div>
 
         <div>
-          <label htmlFor="gru-email" className="block text-xs tracking-wider uppercase text-navy/60 mb-2">
+          <label htmlFor="gru-email" className="block text-xs tracking-wider uppercase text-navy/75 mb-2">
             Email
           </label>
           <input
@@ -125,7 +125,7 @@ function FormGrupal() {
         </div>
 
         <div>
-          <label htmlFor="gru-whatsapp" className="block text-xs tracking-wider uppercase text-navy/60 mb-2">
+          <label htmlFor="gru-whatsapp" className="block text-xs tracking-wider uppercase text-navy/75 mb-2">
             WhatsApp
           </label>
           <input
@@ -183,8 +183,9 @@ export default function MentoriaGrupalContent() {
                 loaded ? "scale-100 opacity-100" : "scale-110 opacity-0"
               }`}
               priority
+              fetchPriority="high"
               sizes="100vw"
-              quality={90}
+              quality={75}
             />
           </div>
           <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/60 to-navy/20" />
@@ -239,7 +240,7 @@ export default function MentoriaGrupalContent() {
           <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-start">
             {/* Left — qué incluye */}
             <ScrollReveal animation="slide-right">
-              <p className="text-[0.72rem] tracking-[0.18em] uppercase text-navy/50 mb-3">
+              <p className="text-[0.72rem] tracking-[0.18em] uppercase text-navy/70 mb-3">
                 ¿Qué incluye?
               </p>
               <h2 className="font-serif text-2xl md:text-3xl font-light text-navy leading-tight mb-8">
@@ -259,7 +260,7 @@ export default function MentoriaGrupalContent() {
                   </div>
                 ))}
               </div>
-              <p className="text-sm text-navy/50 font-light italic">
+              <p className="text-sm text-navy/70 font-light italic">
                 Dejá tus datos y te aviso apenas se abra el próximo grupo.
               </p>
             </ScrollReveal>

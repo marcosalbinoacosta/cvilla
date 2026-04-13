@@ -5,28 +5,21 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import ScrollReveal from "./ScrollReveal";
 
-const charlasImages = [
-  { src: "/images/charla2.webp", w: 800, h: 533 },
-  { src: "/images/charla3.webp", w: 800, h: 532 },
-  { src: "/images/charla4.webp", w: 800, h: 1199 },
-  { src: "/images/charla5.webp", w: 800, h: 1422 },
-  { src: "/images/charla6.webp", w: 800, h: 532 },
-  { src: "/images/charla7.jpeg", w: 1280, h: 720 },
-  { src: "/images/charla8.webp", w: 800, h: 1200 },
-  { src: "/images/charla9.webp", w: 800, h: 1422 },
-  { src: "/images/charla10.jpeg", w: 720, h: 1280 },
-];
+type CharlaImage = {
+  _id: string;
+  src: string;
+  ancho: number;
+  alto: number;
+};
 
 const MARQUEE_H = 220;
-const MARQUEE_GAP = 12; // gap-3 = 0.75rem ≈ 12px
+const MARQUEE_GAP = 12;
 
-// Pre-calculate one set's total width for the marquee offset
-const oneSetWidth = charlasImages.reduce(
-  (sum, img) => sum + Math.round((img.w / img.h) * MARQUEE_H) + MARQUEE_GAP,
-  0
-);
-
-function CharlasMarquee() {
+function CharlasMarquee({ images }: { images: CharlaImage[] }) {
+  const oneSetWidth = images.reduce(
+    (sum, img) => sum + Math.round((img.ancho / img.alto) * MARQUEE_H) + MARQUEE_GAP,
+    0
+  );
   const trackRef = useRef<HTMLDivElement>(null);
   const [paused, setPaused] = useState(false);
 
@@ -51,8 +44,8 @@ function CharlasMarquee() {
             ["--marquee-offset" as string]: `-${oneSetWidth}px`,
           }}
         >
-          {[...charlasImages, ...charlasImages].map((img, i) => {
-            const displayW = Math.round((img.w / img.h) * MARQUEE_H);
+          {[...images, ...images].map((img, i) => {
+            const displayW = Math.round((img.ancho / img.alto) * MARQUEE_H);
             return (
               <div
                 key={i}
@@ -61,7 +54,7 @@ function CharlasMarquee() {
               >
                 <Image
                   src={img.src}
-                  alt={`Charla ${(i % charlasImages.length) + 1}`}
+                  alt={`Charla ${(i % images.length) + 1}`}
                   width={displayW}
                   height={MARQUEE_H}
                   quality={85}
@@ -110,12 +103,13 @@ function VirtuosaCard() {
           <div className="absolute inset-0 will-change-transform">
             <Image
               src="/images/charla.jpeg"
-              quality={85}
+              quality={75}
               alt="Programa Virtuosa"
               fill
               className={`object-cover transition-transform duration-[2s] ease-out ${
                 visible ? "scale-105" : "scale-100"
               }`}
+              sizes="(max-width: 768px) 100vw, 50vw"
             />
           </div>
           <div className="absolute inset-0 bg-navy/40" />
@@ -128,7 +122,7 @@ function VirtuosaCard() {
         {/* Content panel — light background */}
         <div className="bg-white p-8 md:p-10 lg:p-14 flex flex-col justify-center">
           <p
-            className={`text-sm tracking-[0.14em] uppercase text-navy/50 mb-2 font-medium transition-all duration-700 ${
+            className={`text-sm tracking-[0.14em] uppercase text-navy/70 mb-2 font-medium transition-all duration-700 ${
               visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
             style={{ transitionDelay: "300ms" }}
@@ -201,7 +195,7 @@ function VirtuosaCard() {
   );
 }
 
-export default function Servicios() {
+export default function Servicios({ charlasImages }: { charlasImages: CharlaImage[] }) {
   return (
     <section
       id="servicios"
@@ -210,7 +204,7 @@ export default function Servicios() {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <ScrollReveal className="text-center mb-16" animation="blur-in">
-          <p className="text-[0.72rem] tracking-[0.18em] uppercase text-navy/60 mb-3">
+          <p className="text-[0.72rem] tracking-[0.18em] uppercase text-navy/75 mb-3">
             Lo que hago
           </p>
           <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-light text-navy">
@@ -305,7 +299,7 @@ export default function Servicios() {
             <div className="p-8 md:p-10 lg:p-14">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-start">
                 <div>
-                  <p className="text-[0.68rem] tracking-[0.14em] uppercase text-navy/60 mb-2">
+                  <p className="text-[0.68rem] tracking-[0.14em] uppercase text-navy/75 mb-2">
                     04 &middot; Eventos
                   </p>
                   <h3 className="font-serif text-3xl md:text-4xl font-normal text-navy mb-4 leading-tight">
@@ -340,7 +334,7 @@ export default function Servicios() {
                   ].map((tema) => (
                     <span
                       key={tema}
-                      className="text-[0.65rem] tracking-wider uppercase px-3 py-1.5 border border-beige text-navy/70 hover:border-accent/40 hover:text-navy transition-colors duration-300"
+                      className="text-[0.65rem] tracking-wider uppercase px-3 py-1.5 border border-beige text-navy/80 hover:border-accent/40 hover:text-navy transition-colors duration-300"
                     >
                       {tema}
                     </span>
@@ -350,7 +344,7 @@ export default function Servicios() {
             </div>
 
             {/* Photo marquee */}
-            <CharlasMarquee />
+            <CharlasMarquee images={charlasImages} />
           </div>
         </ScrollReveal>
       </div>
