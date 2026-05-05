@@ -71,10 +71,13 @@ function FaqItem({ q, a }: { q: string; a: string }) {
   );
 }
 
-function FormIndividual() {
-  const [sent, setSent] = useState(false);
+type FormState = "idle" | "loading" | "success" | "error";
 
-  if (sent) {
+function FormIndividual() {
+  const [status, setStatus] = useState<FormState>("idle");
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+
+  if (status === "success") {
     return (
       <div className="bg-white p-8 md:p-10 border border-beige text-center">
         <p className="font-serif text-2xl text-navy mb-3">¡Listo!</p>
@@ -85,15 +88,58 @@ function FormIndividual() {
     );
   }
 
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (status === "loading") return;
+
+    const formEl = e.currentTarget;
+    const formData = new FormData(formEl);
+    const payload = {
+      tipo: "mentoria-individual" as const,
+      nombre: String(formData.get("nombre") ?? "").trim(),
+      email: String(formData.get("email") ?? "").trim(),
+      etapa: String(formData.get("etapa") ?? "").trim(),
+      expectativa: String(formData.get("expectativa") ?? "").trim(),
+      website: String(formData.get("website") ?? ""),
+    };
+
+    setStatus("loading");
+    setErrorMsg(null);
+
+    try {
+      const res = await fetch("/api/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const json = (await res.json().catch(() => null)) as
+        | { ok: boolean; error?: string }
+        | null;
+
+      if (!res.ok || !json?.ok) {
+        setStatus("error");
+        setErrorMsg(json?.error ?? "No pudimos enviar tu consulta. Probá de nuevo.");
+        return;
+      }
+
+      setStatus("success");
+    } catch {
+      setStatus("error");
+      setErrorMsg("Error de red. Revisá tu conexión e intentá de nuevo.");
+    }
+  }
+
   return (
     <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        setSent(true);
-      }}
+      onSubmit={onSubmit}
       className="bg-white p-8 md:p-10 border border-beige"
+      noValidate
     >
-      <input type="hidden" name="servicio" value="Mentoría Individual" />
+      {/* Honeypot */}
+      <div className="absolute left-[-9999px] top-auto w-px h-px overflow-hidden" aria-hidden="true">
+        <label htmlFor="ind-website">No completar</label>
+        <input id="ind-website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+      </div>
 
       <div className="space-y-5 mb-6">
         <div>
@@ -105,8 +151,12 @@ function FormIndividual() {
             name="nombre"
             type="text"
             required
+            minLength={2}
+            maxLength={80}
+            autoComplete="name"
+            disabled={status === "loading"}
             placeholder="Tu nombre"
-            className="w-full px-4 py-3.5 border border-beige bg-cream/50 text-sm text-text placeholder-navy/30 outline-none focus:border-accent transition-colors duration-300"
+            className="w-full px-4 py-3.5 border border-beige bg-cream/50 text-sm text-text placeholder-navy/30 outline-none focus:border-accent transition-colors duration-300 disabled:opacity-60"
           />
         </div>
 
@@ -119,8 +169,11 @@ function FormIndividual() {
             name="email"
             type="email"
             required
+            maxLength={120}
+            autoComplete="email"
+            disabled={status === "loading"}
             placeholder="Tu email"
-            className="w-full px-4 py-3.5 border border-beige bg-cream/50 text-sm text-text placeholder-navy/30 outline-none focus:border-accent transition-colors duration-300"
+            className="w-full px-4 py-3.5 border border-beige bg-cream/50 text-sm text-text placeholder-navy/30 outline-none focus:border-accent transition-colors duration-300 disabled:opacity-60"
           />
         </div>
 
@@ -132,14 +185,15 @@ function FormIndividual() {
             id="ind-etapa"
             name="etapa"
             required
-            className="w-full px-4 py-3.5 border border-beige bg-cream/50 text-sm text-text outline-none focus:border-accent transition-colors duration-300"
+            disabled={status === "loading"}
+            className="w-full px-4 py-3.5 border border-beige bg-cream/50 text-sm text-text outline-none focus:border-accent transition-colors duration-300 disabled:opacity-60"
           >
             <option value="">Seleccioná una opción</option>
-            <option value="idea">Tengo una idea pero no arranqué</option>
-            <option value="inicio">Recién estoy empezando</option>
-            <option value="crecimiento">Ya vendo pero quiero escalar</option>
-            <option value="estancado">Mi negocio está estancado</option>
-            <option value="reinvencion">Necesito reinventarme</option>
+            <option value="Tengo una idea pero no arranqué">Tengo una idea pero no arranqué</option>
+            <option value="Recién estoy empezando">Recién estoy empezando</option>
+            <option value="Ya vendo pero quiero escalar">Ya vendo pero quiero escalar</option>
+            <option value="Mi negocio está estancado">Mi negocio está estancado</option>
+            <option value="Necesito reinventarme">Necesito reinventarme</option>
           </select>
         </div>
 
@@ -151,18 +205,24 @@ function FormIndividual() {
             id="ind-expectativa"
             name="expectativa"
             rows={3}
+            maxLength={2000}
+            disabled={status === "loading"}
             placeholder="Contame brevemente qué te gustaría trabajar"
-            className="w-full px-4 py-3.5 border border-beige bg-cream/50 text-sm text-text placeholder-navy/30 outline-none focus:border-accent transition-colors duration-300 resize-none"
+            className="w-full px-4 py-3.5 border border-beige bg-cream/50 text-sm text-text placeholder-navy/30 outline-none focus:border-accent transition-colors duration-300 resize-none disabled:opacity-60"
           />
         </div>
       </div>
 
       <button
         type="submit"
-        className="magnetic-btn btn-gradient w-full text-white text-xs font-medium uppercase tracking-widest px-8 py-4"
+        disabled={status === "loading"}
+        className="magnetic-btn btn-gradient w-full text-white text-xs font-medium uppercase tracking-widest px-8 py-4 disabled:opacity-60 disabled:cursor-not-allowed"
       >
-        Quiero mi mentoría
+        {status === "loading" ? "Enviando..." : "Quiero mi mentoría"}
       </button>
+      <div className="mt-4 min-h-[1.25rem] text-sm" aria-live="polite" role="status">
+        {status === "error" && <p className="text-red-700/90">{errorMsg}</p>}
+      </div>
     </form>
   );
 }
@@ -171,6 +231,7 @@ export default function MentoriaIndividualContent() {
   const heroRef = useRef<HTMLDivElement>(null);
   const [loaded, setLoaded] = useState(false);
 
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => setLoaded(true), []);
 
   useEffect(() => {

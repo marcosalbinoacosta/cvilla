@@ -182,12 +182,12 @@ function VirtuosaCard() {
             }`}
             style={{ transitionDelay: "900ms" }}
           >
-            <a
-              href="#"
+            <Link
+              href="/programa-virtuosa"
               className="magnetic-btn pulse-glow btn-gradient inline-block text-white text-xs md:text-sm font-medium uppercase tracking-widest px-8 py-4"
             >
               Da el próximo paso
-            </a>
+            </Link>
           </div>
         </div>
       </div>

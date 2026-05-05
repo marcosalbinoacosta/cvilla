@@ -72,9 +72,11 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 }
 
 function FormGrupal() {
-  const [sent, setSent] = useState(false);
+  type FormState = "idle" | "loading" | "success" | "error";
+  const [status, setStatus] = useState<FormState>("idle");
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
-  if (sent) {
+  if (status === "success") {
     return (
       <div className="bg-white p-8 md:p-10 border border-beige text-center">
         <p className="font-serif text-2xl text-navy mb-3">¡Te anotaste!</p>
@@ -85,15 +87,57 @@ function FormGrupal() {
     );
   }
 
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (status === "loading") return;
+
+    const formEl = e.currentTarget;
+    const formData = new FormData(formEl);
+    const payload = {
+      tipo: "mentoria-grupal" as const,
+      nombre: String(formData.get("nombre") ?? "").trim(),
+      email: String(formData.get("email") ?? "").trim(),
+      whatsapp: String(formData.get("whatsapp") ?? "").trim(),
+      website: String(formData.get("website") ?? ""),
+    };
+
+    setStatus("loading");
+    setErrorMsg(null);
+
+    try {
+      const res = await fetch("/api/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const json = (await res.json().catch(() => null)) as
+        | { ok: boolean; error?: string }
+        | null;
+
+      if (!res.ok || !json?.ok) {
+        setStatus("error");
+        setErrorMsg(json?.error ?? "No pudimos enviar tu pre-inscripción. Probá de nuevo.");
+        return;
+      }
+
+      setStatus("success");
+    } catch {
+      setStatus("error");
+      setErrorMsg("Error de red. Revisá tu conexión e intentá de nuevo.");
+    }
+  }
+
   return (
     <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        setSent(true);
-      }}
+      onSubmit={onSubmit}
       className="bg-white p-8 md:p-10 border border-beige"
+      noValidate
     >
-      <input type="hidden" name="servicio" value="Mentoría Grupal" />
+      {/* Honeypot */}
+      <div className="absolute left-[-9999px] top-auto w-px h-px overflow-hidden" aria-hidden="true">
+        <label htmlFor="gru-website">No completar</label>
+        <input id="gru-website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+      </div>
 
       <div className="space-y-5 mb-6">
         <div>
@@ -105,8 +149,12 @@ function FormGrupal() {
             name="nombre"
             type="text"
             required
+            minLength={2}
+            maxLength={80}
+            autoComplete="name"
+            disabled={status === "loading"}
             placeholder="Tu nombre"
-            className="w-full px-4 py-3.5 border border-beige bg-cream/50 text-sm text-text placeholder-navy/30 outline-none focus:border-accent transition-colors duration-300"
+            className="w-full px-4 py-3.5 border border-beige bg-cream/50 text-sm text-text placeholder-navy/30 outline-none focus:border-accent transition-colors duration-300 disabled:opacity-60"
           />
         </div>
 
@@ -119,8 +167,11 @@ function FormGrupal() {
             name="email"
             type="email"
             required
+            maxLength={120}
+            autoComplete="email"
+            disabled={status === "loading"}
             placeholder="Tu email"
-            className="w-full px-4 py-3.5 border border-beige bg-cream/50 text-sm text-text placeholder-navy/30 outline-none focus:border-accent transition-colors duration-300"
+            className="w-full px-4 py-3.5 border border-beige bg-cream/50 text-sm text-text placeholder-navy/30 outline-none focus:border-accent transition-colors duration-300 disabled:opacity-60"
           />
         </div>
 
@@ -133,18 +184,25 @@ function FormGrupal() {
             name="whatsapp"
             type="tel"
             required
+            maxLength={40}
+            autoComplete="tel"
+            disabled={status === "loading"}
             placeholder="+54 9 11 1234-5678"
-            className="w-full px-4 py-3.5 border border-beige bg-cream/50 text-sm text-text placeholder-navy/30 outline-none focus:border-accent transition-colors duration-300"
+            className="w-full px-4 py-3.5 border border-beige bg-cream/50 text-sm text-text placeholder-navy/30 outline-none focus:border-accent transition-colors duration-300 disabled:opacity-60"
           />
         </div>
       </div>
 
       <button
         type="submit"
-        className="magnetic-btn btn-gradient w-full text-white text-xs font-medium uppercase tracking-widest px-8 py-4"
+        disabled={status === "loading"}
+        className="magnetic-btn btn-gradient w-full text-white text-xs font-medium uppercase tracking-widest px-8 py-4 disabled:opacity-60 disabled:cursor-not-allowed"
       >
-        Quiero sumarme
+        {status === "loading" ? "Enviando..." : "Quiero sumarme"}
       </button>
+      <div className="mt-4 min-h-[1.25rem] text-sm" aria-live="polite" role="status">
+        {status === "error" && <p className="text-red-700/90">{errorMsg}</p>}
+      </div>
     </form>
   );
 }
@@ -153,6 +211,7 @@ export default function MentoriaGrupalContent() {
   const heroRef = useRef<HTMLDivElement>(null);
   const [loaded, setLoaded] = useState(false);
 
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => setLoaded(true), []);
 
   useEffect(() => {

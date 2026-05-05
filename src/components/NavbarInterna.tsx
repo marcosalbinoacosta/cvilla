@@ -37,7 +37,7 @@ export default function NavbarInterna() {
             &larr; Volver al inicio
           </Link>
           <a
-            href="https://wa.me/5491100000000"
+            href="https://wa.me/5493512797116"
             target="_blank"
             rel="noopener noreferrer"
             className="text-xs font-medium text-white uppercase tracking-widest bg-navy px-5 py-2.5 hover:bg-navy/90 transition-all duration-300"

@@ -4,7 +4,7 @@
 ---
 
 **Fecha de inicio:** 30 de Marzo, 2026
-**Última actualización:** 31 de Marzo, 2026
+**Última actualización:** 19 de Abril, 2026
 **Stack:** Next.js 16.2.1 + React 19 + Tailwind CSS v4 + TypeScript
 **Referencia visual:** [naylanorryh.com](https://www.naylanorryh.com/)
 
@@ -112,9 +112,9 @@ Footer (navy, 3 columnas)
 - [ ] Reemplazar testimonios placeholder con testimonios reales
 - [ ] Configurar número real de WhatsApp Business
 - [ ] Configurar links reales de Instagram y LinkedIn
-- [ ] Integrar Sanity CMS para gestión de contenido
-- [ ] Implementar formulario de contacto funcional (envío de email)
-- [ ] SEO: meta titles, descriptions, Open Graph por sección
+- [x] Integrar Sanity CMS para gestión de contenido (schemas: testimonio, servicio, sobreMi, infoContacto, faq, charlaImagen; studio en `/studio`)
+- [x] Implementar formulario de contacto funcional (envío de email) — `POST /api/contact` con Resend, validación zod, honeypot, estados loading/success/error
+- [x] SEO: meta titles, descriptions, Open Graph por sección (home + mentoría individual/grupal), JSON-LD ProfessionalService, canonical, robots ampliado
 - [ ] Registrar y configurar dominio
 
 ### Semana 3 (14 Abr – 17 Abr)
@@ -146,19 +146,23 @@ Footer (navy, 3 columnas)
 
 ## FASE 2 — Plataforma de Cursos (22 Abr – 8 May)
 
-### Semana 1 (22–25 Abr): Aula Virtual
-- [ ] Sistema de usuarios (registro, login, recupero de contraseña) con NextAuth.js
-- [ ] Panel del alumno (mis cursos, progreso)
-- [ ] Carga de módulos del Programa Virtuosa en Sanity
-- [ ] Integración Cloudflare Stream (signed URLs para videos)
-- [ ] Control de acceso (solo usuarios con compra aprobada)
+### Semana 1 (22–25 Abr): Aula Virtual — **adelantada al 19 Abr (scaffold)**
+- [x] Sistema de usuarios con **NextAuth v5 + magic link por email (Resend)** — sin passwords
+- [x] Panel del alumno (`/aula`) con listado de cursos contratados
+- [x] Schemas Sanity `curso` + `modulo` (con videoId, duración, materiales descargables)
+- [x] Integración Cloudflare Stream (iframe del player con `videoId` + `CLOUDFLARE_STREAM_CUSTOMER_CODE`)
+- [x] Control de acceso (`src/lib/access.ts`) + middleware que protege `/aula/*`
+- [ ] Signed URLs de Cloudflare Stream (cuando activemos videos protegidos)
+- [ ] Tracking de progreso por módulo (pendiente de definición de UX)
 
-### Semana 2 (28 Abr – 02 May): Pagos y Ventas
-- [ ] Checkout con Mercado Pago (Checkout Pro)
-- [ ] Webhook: activación automática de acceso post-pago
-- [ ] Email transaccional (bienvenida + credenciales) con Resend o Brevo
-- [ ] Landing page de ventas del Programa Virtuosa
-- [ ] Sistema de reserva + cobro para Mentoría
+### Semana 2 (28 Abr – 02 May): Pagos y Ventas — **scaffold 19 Abr**
+- [x] Checkout con Mercado Pago Checkout Pro (`/api/checkout/mercadopago`) — crea `compra`, usuario, preferencia y redirige al init_point
+- [x] Webhook (`/api/webhooks/mercadopago`) con verificación HMAC `x-signature`, lookup del payment por API y grant de acceso al aprobarse
+- [x] Landing de ventas `/programa-virtuosa` (toma datos de Sanity, CTA con email/nombre)
+- [x] Páginas de retorno `/comprar/{gracias,error,pendiente}`
+- [x] Email transaccional de bienvenida tras compra aprobada (`src/lib/email.ts` → `sendWelcomeEmail`, invocado automáticamente desde el webhook y desde el script admin)
+- [x] Script admin para grantear acceso manual (`npm run grant <email> <slug>`) — útil para regalar cupos, recuperar compras perdidas y testing sin MP
+- [ ] Sistema de reserva + cobro para Mentoría (no scaffold aún)
 
 ### Semana 3 (05–08 May): Testing y Lanzamiento
 - [ ] Testing flujo completo: Compra → Email → Acceso → Video
@@ -212,5 +216,45 @@ cvillafane-web/
 
 ---
 
-*Documento generado: 31 de Marzo, 2026*
+## CONFIGURACIÓN PENDIENTE ANTES DE DEPLOY
+
+### Variables de entorno (Vercel / `.env.local`)
+Plantilla completa en `.env.local.example`. En producción hay que setear:
+- `NEXT_PUBLIC_SITE_URL` — URL final del sitio
+- `RESEND_API_KEY` — https://resend.com/api-keys
+- `CONTACT_TO_EMAIL` — email que recibe los mensajes del formulario
+- `CONTACT_FROM_EMAIL` (opcional) — una vez verificado el dominio en Resend
+- `DATABASE_URL` — connection string de Neon Postgres (pooled)
+- `AUTH_SECRET` — `openssl rand -base64 32`
+- `MP_ACCESS_TOKEN` — Mercado Pago (sandbox primero, luego productivo)
+- `MP_WEBHOOK_SECRET` — lo provee MP al crear el webhook en el panel
+- `CLOUDFLARE_STREAM_CUSTOMER_CODE` — subdominio `customer-XXXX` del player
+
+> Mientras no haya dominio verificado en Resend, el `from` por defecto es `onboarding@resend.dev` (solo sirve para probar).
+
+### Schema de DB
+Correr una vez `npm run db:push` (desarrollo) o `npm run db:generate && npm run db:migrate` (producción) después de setear `DATABASE_URL`.
+
+### Mercado Pago webhook
+Configurar en el panel de MP la URL `https://DOMINIO/api/webhooks/mercadopago`, suscribir al evento `payment`, y copiar la "Clave secreta" a `MP_WEBHOOK_SECRET`.
+
+---
+
+## PRÓXIMA SESIÓN
+
+**Retomar con:** Mercado Pago sandbox end-to-end.
+1. Crear app en https://www.mercadopago.com.ar/developers/panel/app
+2. Copiar "Test access token" a `MP_ACCESS_TOKEN`
+3. Configurar webhook `https://{tunnel}/api/webhooks/mercadopago` (usar ngrok en dev) y copiar secret a `MP_WEBHOOK_SECRET`
+4. Probar compra con tarjeta de test MP
+5. Verificar: `compra.status=approved` en DB + welcome email + `/aula` muestra el curso
+
+**Después de eso:**
+- Signed URLs de Cloudflare Stream (videos privados)
+- Reserva + cobro de mentorías
+- Deploy a Vercel + dominio
+
+---
+
+*Documento actualizado: 19 de Abril, 2026*
 *Desarrollador: Marcos Albino Acosta*

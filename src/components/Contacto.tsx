@@ -10,9 +10,13 @@ type ContactoData = {
   ubicacion?: string;
 };
 
+type FormState = "idle" | "loading" | "success" | "error";
+
 export default function Contacto({ data }: { data?: ContactoData }) {
   const formRef = useRef<HTMLFormElement>(null);
   const [formVisible, setFormVisible] = useState(false);
+  const [status, setStatus] = useState<FormState>("idle");
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   useEffect(() => {
     const el = formRef.current;
@@ -29,6 +33,47 @@ export default function Contacto({ data }: { data?: ContactoData }) {
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
+
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (status === "loading") return;
+
+    const formEl = e.currentTarget;
+    const formData = new FormData(formEl);
+    const payload = {
+      tipo: "contacto" as const,
+      nombre: String(formData.get("nombre") ?? "").trim(),
+      email: String(formData.get("email") ?? "").trim(),
+      mensaje: String(formData.get("mensaje") ?? "").trim(),
+      website: String(formData.get("website") ?? ""),
+    };
+
+    setStatus("loading");
+    setErrorMsg(null);
+
+    try {
+      const res = await fetch("/api/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const json = (await res.json().catch(() => null)) as
+        | { ok: boolean; error?: string }
+        | null;
+
+      if (!res.ok || !json?.ok) {
+        setStatus("error");
+        setErrorMsg(json?.error ?? "No pudimos enviar el mensaje. Probá de nuevo.");
+        return;
+      }
+
+      setStatus("success");
+      formEl.reset();
+    } catch {
+      setStatus("error");
+      setErrorMsg("Error de red. Revisá tu conexión e intentá de nuevo.");
+    }
+  }
 
   return (
     <section
@@ -90,7 +135,18 @@ export default function Contacto({ data }: { data?: ContactoData }) {
 
         {/* Right — form with sequential field reveal */}
         <div>
-          <form ref={formRef} className="text-left">
+          <form ref={formRef} className="text-left" onSubmit={onSubmit} noValidate>
+            {/* Honeypot — bots only */}
+            <div className="absolute left-[-9999px] top-auto w-px h-px overflow-hidden" aria-hidden="true">
+              <label htmlFor="website">No completar</label>
+              <input
+                id="website"
+                name="website"
+                type="text"
+                tabIndex={-1}
+                autoComplete="off"
+              />
+            </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5">
               <div
                 className={`transition-all duration-600 ${
@@ -106,9 +162,15 @@ export default function Contacto({ data }: { data?: ContactoData }) {
                 </label>
                 <input
                   id="nombre"
+                  name="nombre"
                   type="text"
+                  required
+                  minLength={2}
+                  maxLength={80}
+                  autoComplete="name"
+                  disabled={status === "loading"}
                   placeholder="Tu nombre"
-                  className="w-full px-4 py-3.5 border border-beige bg-white text-sm text-text outline-none focus:border-accent transition-colors duration-300"
+                  className="w-full px-4 py-3.5 border border-beige bg-white text-sm text-text outline-none focus:border-accent transition-colors duration-300 disabled:opacity-60"
                 />
               </div>
               <div
@@ -125,9 +187,14 @@ export default function Contacto({ data }: { data?: ContactoData }) {
                 </label>
                 <input
                   id="email"
+                  name="email"
                   type="email"
+                  required
+                  maxLength={120}
+                  autoComplete="email"
+                  disabled={status === "loading"}
                   placeholder="Tu email"
-                  className="w-full px-4 py-3.5 border border-beige bg-white text-sm text-text outline-none focus:border-accent transition-colors duration-300"
+                  className="w-full px-4 py-3.5 border border-beige bg-white text-sm text-text outline-none focus:border-accent transition-colors duration-300 disabled:opacity-60"
                 />
               </div>
             </div>
@@ -145,9 +212,14 @@ export default function Contacto({ data }: { data?: ContactoData }) {
               </label>
               <textarea
                 id="mensaje"
-                placeholder="¿En qué puedo ayudarte?"
+                name="mensaje"
+                required
+                minLength={10}
+                maxLength={2000}
                 rows={5}
-                className="w-full px-4 py-3.5 border border-beige bg-white text-sm text-text outline-none focus:border-accent transition-colors duration-300 resize-none"
+                disabled={status === "loading"}
+                placeholder="¿En qué puedo ayudarte?"
+                className="w-full px-4 py-3.5 border border-beige bg-white text-sm text-text outline-none focus:border-accent transition-colors duration-300 resize-none disabled:opacity-60"
               />
             </div>
             <div
@@ -158,10 +230,25 @@ export default function Contacto({ data }: { data?: ContactoData }) {
             >
               <button
                 type="submit"
-                className="magnetic-btn w-full sm:w-auto bg-navy text-white text-xs font-medium uppercase tracking-widest px-10 py-4 hover:bg-accent transition-all duration-300 hover:shadow-lg hover:shadow-accent/20"
+                disabled={status === "loading"}
+                className="magnetic-btn w-full sm:w-auto bg-navy text-white text-xs font-medium uppercase tracking-widest px-10 py-4 hover:bg-accent transition-all duration-300 hover:shadow-lg hover:shadow-accent/20 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:bg-navy disabled:hover:shadow-none"
               >
-                Enviar mensaje
+                {status === "loading" ? "Enviando..." : "Enviar mensaje"}
               </button>
+              <div
+                className="mt-4 min-h-[1.25rem] text-sm"
+                aria-live="polite"
+                role="status"
+              >
+                {status === "success" && (
+                  <p className="text-navy/80">
+                    ¡Gracias! Tu mensaje fue enviado. Te respondo a la brevedad.
+                  </p>
+                )}
+                {status === "error" && (
+                  <p className="text-red-700/90">{errorMsg}</p>
+                )}
+              </div>
             </div>
           </form>
         </div>

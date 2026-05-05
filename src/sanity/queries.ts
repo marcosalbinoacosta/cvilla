@@ -44,7 +44,13 @@ export async function getServicios() {
 }
 
 export async function getInfoContacto() {
-  return client.fetch(
+  const data = await client.fetch<{
+    email?: string;
+    whatsapp?: string;
+    ubicacion?: string;
+    instagram?: string;
+    linkedin?: string;
+  } | null>(
     `*[_id == "infoContacto"][0] {
       email,
       whatsapp,
@@ -53,6 +59,14 @@ export async function getInfoContacto() {
       linkedin
     }`
   );
+  if (!data) return undefined;
+  return {
+    email: data.email?.trim() || undefined,
+    whatsapp: data.whatsapp?.trim() || undefined,
+    ubicacion: data.ubicacion?.trim() || undefined,
+    instagram: data.instagram?.trim() || undefined,
+    linkedin: data.linkedin?.trim() || undefined,
+  };
 }
 
 export async function getSobreMi() {

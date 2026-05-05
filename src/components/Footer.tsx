@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
 type FooterData = {
@@ -134,12 +135,12 @@ export default function Footer({ data }: { data?: FooterData }) {
           <p className="text-[0.65rem] text-cream/50 tracking-wide">
             &copy; 2026 Catalina Villafañe. Todos los derechos reservados.
           </p>
-          <a
-            href="#"
+          <Link
+            href="/politica-privacidad"
             className="text-[0.65rem] text-cream/50 hover:text-cream/70 transition-colors tracking-wide"
           >
             Política de privacidad
-          </a>
+          </Link>
         </div>
       </div>
     </footer>
