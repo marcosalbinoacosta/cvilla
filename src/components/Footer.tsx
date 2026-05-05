@@ -64,19 +64,19 @@ export default function Footer({ data }: { data?: FooterData }) {
             </p>
             <ul className="space-y-2.5">
               {[
-                { href: "#inicio", label: "Inicio" },
-                { href: "#proposito", label: "Mi propósito" },
-                { href: "#servicios", label: "Servicios" },
-                { href: "#sobre-mi", label: "Sobre mí" },
-                { href: "#contacto", label: "Contacto" },
+                { href: "/#inicio", label: "Inicio" },
+                { href: "/#proposito", label: "Mi propósito" },
+                { href: "/#servicios", label: "Servicios" },
+                { href: "/#sobre-mi", label: "Sobre mí" },
+                { href: "/#contacto", label: "Contacto" },
               ].map((link) => (
                 <li key={link.href}>
-                  <a
+                  <Link
                     href={link.href}
                     className="text-xs text-cream/70 hover:text-cream/90 transition-colors duration-300"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
