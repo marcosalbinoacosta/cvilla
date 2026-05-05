@@ -186,6 +186,13 @@ body {
   -webkit-backdrop-filter: blur(12px) saturate(180%);
 }
 
+/* Glass effect for navbar over dark backgrounds */
+.glass-dark {
+  background: rgba(27, 46, 107, 0.7);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+}
+
 /* Script font clipping fix — Dancing Script ascenders/descenders get clipped */
 .font-script {
   padding: 0.15em 0.05em;

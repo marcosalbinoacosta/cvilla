@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
-import NavbarInterna from "@/components/NavbarInterna";
+import Navbar from "@/components/Navbar";
 import ScrollReveal from "@/components/ScrollReveal";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
@@ -246,7 +246,7 @@ export default function MentoriaIndividualContent() {
 
   return (
     <>
-      <NavbarInterna />
+      <Navbar />
       <main>
         {/* === HERO === */}
         <section className="min-h-screen bg-cream relative overflow-hidden">

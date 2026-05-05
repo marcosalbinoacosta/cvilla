@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import NavbarInterna from "@/components/NavbarInterna";
+import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { getInfoContacto } from "@/sanity/queries";
@@ -23,7 +23,7 @@ export default async function Page() {
 
   return (
     <>
-      <NavbarInterna />
+      <Navbar />
       <main className="bg-cream pt-32 pb-20 px-6 md:px-12 lg:px-20">
         <article className="max-w-3xl mx-auto">
           <p className="text-xs tracking-[0.18em] uppercase text-navy/70 mb-3">

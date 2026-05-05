@@ -32,7 +32,7 @@ export default async function Page() {
 
   return (
     <>
-      <Navbar />
+      <Navbar dark />
       <main>
         <VirtuosaPreLanzamiento />
       </main>
