@@ -207,11 +207,7 @@ export default function VirtuosaPreLanzamiento() {
       <div className="absolute -bottom-40 -right-40 w-[500px] h-[500px] bg-accent-light/5 rounded-full blur-3xl pointer-events-none" />
 
       <div className="relative z-10 max-w-3xl mx-auto text-center">
-        <p className="text-xs tracking-[0.18em] uppercase text-accent-light mb-6">
-          Programa · Catalina Villafañe
-        </p>
-
-        <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl text-white font-light leading-[1.1] mb-6">
+        <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl text-white font-light leading-[1.1] mb-6 mt-6">
           <span className="italic">El Programa</span>{" "}
           <span className="font-script text-accent-light text-5xl md:text-7xl lg:text-8xl not-italic">
             Virtuosa
@@ -232,13 +228,20 @@ export default function VirtuosaPreLanzamiento() {
         </div>
 
         <div className="max-w-2xl mx-auto mb-14">
-          <p className="text-base md:text-lg text-white/80 font-light leading-relaxed mb-4">
-            4 módulos prácticos. 2 horas de pura estrategia, mentalidad y acción
-            para emprendedoras que quieren ordenar su negocio y dar el próximo paso.
+          <p className="text-base md:text-lg text-white/80 font-light leading-relaxed mb-6">
+            Vas a trabajar en los 4 pilares básicos para construir un negocio
+            rentable y con propósito. Hacelo a tu ritmo (asincrónico), cada
+            módulo queda disponible para que consultes las veces que quieras.
           </p>
-          <p className="text-sm md:text-base text-white/60 font-light italic">
-            Cupos limitados. Las primeras en anotarse acceden a un precio
-            especial de pre-lanzamiento.
+          <p className="text-sm md:text-base text-white/85 font-light leading-relaxed">
+            Sumate a la lista de espera y compralo a precio{" "}
+            <span className="font-medium text-accent-light tracking-wide">
+              LANZAMIENTO $35.000
+            </span>
+            .
+          </p>
+          <p className="text-xs md:text-sm text-white/50 font-light italic mt-2">
+            Precio de lista <span className="line-through">$55.000</span>
           </p>
         </div>
 

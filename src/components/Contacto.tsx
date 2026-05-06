@@ -90,7 +90,7 @@ export default function Contacto({ data }: { data?: ContactoData }) {
             ¿Hablamos?
           </h2>
           <p className="font-serif italic text-base md:text-lg text-gray-400 mb-8">
-            Contame en qué estás trabajando y cómo puedo ayudarte.
+            Contame en qué estás trabajando y te asesoro.
           </p>
           <div className="space-y-4 text-sm text-navy/80 font-light">
             <div className="flex items-center gap-3 group">

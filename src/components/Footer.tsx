@@ -41,10 +41,10 @@ export default function Footer({ data }: { data?: FooterData }) {
             }`}
           >
             <p className="font-serif text-xl text-cream font-light mb-3">
-              Catalina{" "}
               <span className="font-script text-accent-light text-2xl">
-                Villafañe
-              </span>
+                Catalina
+              </span>{" "}
+              Villafañe
             </p>
             <p className="text-xs text-cream/60 leading-relaxed max-w-xs">
               Consultora &amp; Mentora de Negocios. Ayudo a pymes y

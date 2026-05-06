@@ -52,10 +52,10 @@ export default function Navbar({ dark = false }: NavbarProps) {
           href="/"
           className={`font-serif text-lg md:text-xl font-semibold ${logoText} tracking-wide`}
         >
-          Catalina{" "}
           <span className="font-script text-shimmer text-xl md:text-2xl">
-            Villafañe
-          </span>
+            Catalina
+          </span>{" "}
+          Villafañe
         </Link>
 
         {/* Desktop links */}
