@@ -219,7 +219,7 @@ export default function VirtuosaPreLanzamiento() {
         <p className="font-serif text-xl md:text-2xl italic text-white/70 mb-12">
           en{" "}
           <span className="font-script text-accent-light text-3xl md:text-4xl not-italic">
-            junio 2026
+            julio 2026
           </span>
         </p>
 
