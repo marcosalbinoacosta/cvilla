@@ -94,3 +94,95 @@ export async function getFaqs(seccion: "individual" | "grupal" | "general") {
     { seccion }
   );
 }
+
+export async function getCursoBySlug(slug: string) {
+  return client.fetch(
+    `*[_type == "curso" && slug.current == $slug][0] {
+      titulo,
+      subtitulo,
+      descripcion,
+      duracionTexto,
+      precio,
+      currency
+    }`,
+    { slug }
+  );
+}
+
+export async function getCursosResumen() {
+  return client.fetch(
+    `*[_type == "curso"] | order(titulo asc) {
+      _id,
+      titulo,
+      "slug": slug.current,
+      "nModulos": count(modulos),
+      activo
+    }`
+  );
+}
+
+export async function getCuponByCodigo(codigo: string) {
+  // Sin CDN: un cupón desactivado/vencido debe dejar de funcionar al instante.
+  return client.withConfig({ useCdn: false }).fetch(
+    `*[_type == "cupon" && upper(codigo) == upper($codigo)][0] {
+      "codigo": upper(codigo),
+      tipo,
+      valor,
+      activo,
+      vencimiento,
+      "cursos": cursosAplicables[]->slug.current
+    }`,
+    { codigo }
+  );
+}
+
+export async function getCursoConModulos(slug: string) {
+  return client.fetch(
+    `*[_type == "curso" && slug.current == $slug][0] {
+      _id,
+      titulo,
+      subtitulo,
+      "slug": slug.current,
+      videoIntroId,
+      introTitulo,
+      introDescripcion,
+      modulos[]-> {
+        _id,
+        titulo,
+        "slug": slug.current,
+        orden,
+        descripcion,
+        videoId,
+        duracionMin
+      }
+    }`,
+    { slug }
+  );
+}
+
+export async function getModuloBySlug(cursoSlug: string, moduloSlug: string) {
+  // Se busca el módulo por su slug, restringido a los referenciados por el
+  // curso. La forma `curso.modulos[]->[filtro][0]` de GROQ devuelve null por
+  // precedencia del `->`, así que se resuelve el módulo directamente.
+  return client.fetch(
+    `*[
+      _type == "modulo" &&
+      slug.current == $moduloSlug &&
+      _id in *[_type == "curso" && slug.current == $cursoSlug][0].modulos[]._ref
+    ][0] {
+      _id,
+      titulo,
+      "slug": slug.current,
+      orden,
+      descripcion,
+      videoId,
+      videoUrl,
+      duracionMin,
+      materiales[] {
+        nombre,
+        "url": archivo.asset->url
+      }
+    }`,
+    { cursoSlug, moduloSlug }
+  );
+}

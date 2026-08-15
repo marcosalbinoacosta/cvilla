@@ -104,7 +104,7 @@ function VirtuosaCard() {
             <Image
               src="/images/charla.jpeg"
               quality={75}
-              alt="Programa Virtuosa"
+              alt="Emprendé con Confianza"
               fill
               className={`object-cover transition-transform duration-[2s] ease-out ${
                 visible ? "scale-105" : "scale-100"
@@ -127,7 +127,7 @@ function VirtuosaCard() {
             }`}
             style={{ transitionDelay: "300ms" }}
           >
-            01 &middot; Programa
+            01 &middot; Curso
           </p>
           <h3
             className={`font-serif text-3xl md:text-4xl lg:text-5xl font-normal text-navy mb-4 leading-tight transition-all duration-700 ${
@@ -135,7 +135,7 @@ function VirtuosaCard() {
             }`}
             style={{ transitionDelay: "400ms" }}
           >
-            Virtuosa
+            Emprendé con Confianza
           </h3>
           <p
             className={`font-serif text-xl md:text-2xl lg:text-3xl italic text-navy/80 mb-5 leading-snug transition-all duration-700 ${
@@ -154,8 +154,8 @@ function VirtuosaCard() {
             }`}
             style={{ transitionDelay: "600ms" }}
           >
-            4 módulos prácticos &middot; 2 horas de pura estrategia, mentalidad
-            y acción
+            1 encuentro grupal en vivo &middot; 1 hora de estrategia para tus
+            primeros pasos
           </p>
           <p
             className={`text-sm md:text-base text-text font-light leading-relaxed mb-3 transition-all duration-700 ${
@@ -163,9 +163,9 @@ function VirtuosaCard() {
             }`}
             style={{ transitionDelay: "700ms" }}
           >
-            Si ya empezaste pero tu negocio está estancado o desordenado, este
-            programa te ayuda a recuperar claridad y definir estrategia para
-            crear con base sólida.
+            Si estás empezando tu emprendimiento y te llenás de dudas —por
+            dónde arranco, si mi idea sirve, qué hago primero— este curso te
+            ordena las ideas y te da dirección.
           </p>
           <p
             className={`text-sm md:text-base text-text font-light leading-relaxed mb-8 transition-all duration-700 ${
@@ -173,8 +173,8 @@ function VirtuosaCard() {
             }`}
             style={{ transitionDelay: "800ms" }}
           >
-            Vas a definir y avanzar con lo que tenés que hacer y dejar de hacer
-            para dar el próximo paso y vender.
+            En una hora vas a definir prioridades y tomar decisiones con más
+            seguridad, con acceso a la comunidad y beneficios exclusivos.
           </p>
           <div
             className={`transition-all duration-700 ${

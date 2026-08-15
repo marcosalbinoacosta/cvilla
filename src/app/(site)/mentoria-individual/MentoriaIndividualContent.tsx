@@ -16,6 +16,15 @@ const incluye = [
   "Material de apoyo y ejercicios prácticos",
 ];
 
+const paraQuien = [
+  "Querés trabajar tu emprendimiento de manera 1 a 1, con foco en tu caso particular.",
+  "Necesitás claridad, estrategia y acompañamiento adaptado a tu realidad.",
+  "Buscás destrabar dudas concretas y tomar decisiones con mayor seguridad.",
+  "Necesitás un espacio confidencial, cercano y totalmente orientado a tus objetivos.",
+  "Preferís un proceso más profundo, flexible y personalizado.",
+  "Querés avanzar con un plan hecho a tu medida.",
+];
+
 const faqs = [
   {
     q: "¿Cuánto dura el proceso de mentoría?",
@@ -315,6 +324,32 @@ export default function MentoriaIndividualContent() {
                 Quiero mi mentoría
               </a>
             </div>
+          </div>
+        </section>
+
+        {/* === PARA QUIÉN ES === */}
+        <section className="bg-white py-20 md:py-28 px-6 md:px-12 lg:px-20">
+          <div className="max-w-3xl mx-auto">
+            <ScrollReveal animation="fade-up" className="mb-10">
+              <p className="text-[0.72rem] tracking-[0.18em] uppercase text-navy/70 mb-3">
+                ¿Es para vos?
+              </p>
+              <h2 className="font-serif text-2xl md:text-3xl font-light text-navy leading-tight">
+                Este espacio es para vos si…
+              </h2>
+            </ScrollReveal>
+            <ScrollReveal animation="fade-up" delay={100}>
+              <ul className="space-y-4">
+                {paraQuien.map((item, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <span className="w-1.5 h-1.5 rounded-full bg-gradient-to-br from-accent to-accent-light shrink-0 mt-2.5" />
+                    <span className="text-base md:text-lg text-navy/80 font-light leading-relaxed">
+                      {item}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </ScrollReveal>
           </div>
         </section>
 

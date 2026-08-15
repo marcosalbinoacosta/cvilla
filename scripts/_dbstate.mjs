@@ -1,0 +1,13 @@
+import { config } from "dotenv";
+import { neon } from "@neondatabase/serverless";
+config({ path: ".env.local" });
+const sql = neon(process.env.DATABASE_URL);
+const users = await sql`SELECT id, email, name FROM "user" ORDER BY email`;
+const accesos = await sql`SELECT "userId","productoId","activo" FROM acceso_curso`;
+const compras = await sql`SELECT id,"userId","productoId",status FROM compra ORDER BY "createdAt" DESC LIMIT 10`;
+const msgs = await sql`SELECT count(*)::int AS n FROM mensaje`;
+const prog = await sql`SELECT count(*)::int AS n FROM progreso_modulo`;
+console.log("USERS:", JSON.stringify(users, null, 2));
+console.log("ACCESOS:", JSON.stringify(accesos, null, 2));
+console.log("COMPRAS:", JSON.stringify(compras, null, 2));
+console.log("MENSAJES:", msgs[0].n, "| PROGRESO:", prog[0].n);

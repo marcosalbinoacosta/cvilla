@@ -16,6 +16,14 @@ const incluye = [
   "Acceso a grabaciones de las sesiones",
 ];
 
+const paraQuien = [
+  "Querés avanzar en tu emprendimiento acompañada por otras mujeres que están en una etapa similar.",
+  "Te sirve aprender en comunidad, compartir experiencias y sentirte acompañada.",
+  "Te interesa sentirte parte de un grupo que te impulsa a sostener el proceso.",
+  "Tenés ganas de aprender, participar y comprometerte con tu crecimiento.",
+  "Querés destrabar ideas y tomar decisiones con apoyo y en grupo.",
+];
+
 const faqs = [
   {
     q: "¿Cuántas personas participan en cada grupo?",
@@ -291,6 +299,32 @@ export default function MentoriaGrupalContent() {
             >
               Quiero sumarme
             </a>
+          </div>
+        </section>
+
+        {/* === PARA QUIÉN ES === */}
+        <section className="bg-white py-20 md:py-28 px-6 md:px-12 lg:px-20">
+          <div className="max-w-3xl mx-auto">
+            <ScrollReveal animation="fade-up" className="mb-10">
+              <p className="text-[0.72rem] tracking-[0.18em] uppercase text-navy/70 mb-3">
+                ¿Es para vos?
+              </p>
+              <h2 className="font-serif text-2xl md:text-3xl font-light text-navy leading-tight">
+                Este espacio es para vos si…
+              </h2>
+            </ScrollReveal>
+            <ScrollReveal animation="fade-up" delay={100}>
+              <ul className="space-y-4">
+                {paraQuien.map((item, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <span className="w-1.5 h-1.5 rounded-full bg-gradient-to-br from-accent to-accent-light shrink-0 mt-2.5" />
+                    <span className="text-base md:text-lg text-navy/80 font-light leading-relaxed">
+                      {item}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </ScrollReveal>
           </div>
         </section>
 

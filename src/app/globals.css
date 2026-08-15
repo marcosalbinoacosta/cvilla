@@ -201,13 +201,31 @@ body {
   margin: -0.15em -0.05em;
 }
 
-/* Text gradient shimmer */
+/* Text gradient shimmer — sobre fondos claros */
 .text-shimmer {
   background: linear-gradient(
     110deg,
     var(--color-accent) 30%,
     var(--color-accent-light) 50%,
     var(--color-accent) 70%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 4s ease-in-out infinite;
+  padding: 0.15em 0.05em;
+  margin: -0.15em -0.05em;
+}
+
+/* Text gradient shimmer — sobre fondos oscuros (navy).
+   Mantiene el rosa de marca pero con picos claros para que brille y se lea. */
+.text-shimmer-light {
+  background: linear-gradient(
+    110deg,
+    var(--color-accent-light) 25%,
+    #ffffff 50%,
+    var(--color-accent-light) 75%
   );
   background-size: 200% 100%;
   -webkit-background-clip: text;

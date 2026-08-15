@@ -6,21 +6,21 @@ import { getInfoContacto } from "@/sanity/queries";
 import VirtuosaPreLanzamiento from "./VirtuosaPreLanzamiento";
 
 const DESCRIPTION =
-  "El Programa Virtuosa abre inscripciones en junio 2026. Dejá tu email y te avisamos antes que nadie cuando esté disponible.";
+  "Emprendé con Confianza: en una hora ordenás tus ideas, definís prioridades y das los primeros pasos de tu emprendimiento con más seguridad. Incluye un encuentro grupal en vivo, acceso a la comunidad y beneficios exclusivos.";
 
 export const metadata: Metadata = {
-  title: "Programa Virtuosa — Próximamente",
+  title: "Emprendé con Confianza — Curso online",
   description: DESCRIPTION,
   alternates: { canonical: "/programa-virtuosa" },
   openGraph: {
-    title: "Programa Virtuosa — Próximamente",
+    title: "Emprendé con Confianza — Curso online",
     description: DESCRIPTION,
     url: "/programa-virtuosa",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Programa Virtuosa — Próximamente",
+    title: "Emprendé con Confianza — Curso online",
     description: DESCRIPTION,
   },
 };

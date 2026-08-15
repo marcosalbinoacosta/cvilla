@@ -4,6 +4,9 @@ import charlaImagen from "./charlaImagen";
 import infoContacto from "./infoContacto";
 import sobreMi from "./sobreMi";
 import faq from "./faq";
+import curso from "./curso";
+import modulo from "./modulo";
+import cupon from "./cupon";
 
 export const schemaTypes = [
   testimonio,
@@ -12,4 +15,7 @@ export const schemaTypes = [
   infoContacto,
   sobreMi,
   faq,
+  curso,
+  modulo,
+  cupon,
 ];

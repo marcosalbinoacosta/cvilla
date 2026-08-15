@@ -22,7 +22,7 @@ const dancingScript = Dancing_Script({
 });
 
 const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://catalinavillafane.com";
+  process.env.NEXT_PUBLIC_SITE_URL || "https://catalinavilla.ar";
 const SITE_TITLE = "Catalina Villafañe — Consultora & Mentora de Negocios";
 const SITE_DESCRIPTION =
   "Negocios que crecen con estrategia y propósito. Consultoría, mentoría y capacitación para pymes y emprendedoras en Córdoba, Argentina.";
@@ -43,7 +43,8 @@ export const metadata: Metadata = {
     "mentora de negocios",
     "mentoría para emprendedoras",
     "coach de negocios Córdoba",
-    "programa Virtuosa",
+    "Emprendé con Confianza",
+    "curso para emprender",
     "charlas motivacionales",
     "Catalina Villafañe",
   ],

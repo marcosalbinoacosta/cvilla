@@ -52,7 +52,7 @@ export default function Navbar({ dark = false }: NavbarProps) {
           href="/"
           className={`font-serif text-lg md:text-xl font-semibold ${logoText} tracking-wide`}
         >
-          <span className="font-script text-shimmer text-xl md:text-2xl">
+          <span className={`font-script text-xl md:text-2xl ${dark ? "text-shimmer-light" : "text-shimmer"}`}>
             Catalina
           </span>{" "}
           Villafañe
@@ -72,10 +72,10 @@ export default function Navbar({ dark = false }: NavbarProps) {
           ))}
           <li>
             <Link
-              href="/#contacto"
+              href="/ingresar"
               className={`text-xs font-medium uppercase tracking-widest px-5 py-2.5 transition-all duration-300 ${ctaBtn}`}
             >
-              Contacto
+              Ingresar
             </Link>
           </li>
         </ul>
@@ -118,11 +118,11 @@ export default function Navbar({ dark = false }: NavbarProps) {
           ))}
           <li>
             <Link
-              href="/#contacto"
+              href="/ingresar"
               onClick={() => setOpen(false)}
               className={`inline-block text-sm uppercase tracking-widest px-6 py-3 ${ctaBtn}`}
             >
-              Contacto
+              Ingresar
             </Link>
           </li>
         </ul>

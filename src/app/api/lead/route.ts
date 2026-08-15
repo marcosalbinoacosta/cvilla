@@ -27,14 +27,14 @@ const SUBJECT: Record<(typeof TIPOS)[number], (nombre: string) => string> = {
   "contacto": (n) => `Nuevo contacto: ${n}`,
   "mentoria-individual": (n) => `Mentoría Individual — consulta de ${n}`,
   "mentoria-grupal": (n) => `Mentoría Grupal — pre-inscripción de ${n}`,
-  "waitlist-virtuosa": (n) => `Programa Virtuosa (waitlist): ${n}`,
+  "waitlist-virtuosa": (n) => `Emprendé con Confianza (waitlist): ${n}`,
 };
 
 const TITULO: Record<(typeof TIPOS)[number], string> = {
   "contacto": "Nuevo contacto desde la web",
   "mentoria-individual": "Nueva consulta de Mentoría Individual",
   "mentoria-grupal": "Nueva pre-inscripción de Mentoría Grupal",
-  "waitlist-virtuosa": "Nuevo lead en la lista de espera de Virtuosa",
+  "waitlist-virtuosa": "Nuevo lead en la lista de espera de Emprendé con Confianza",
 };
 
 function safe(s: string) {

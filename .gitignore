@@ -36,6 +36,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# videos locales de prueba (usar Cloudflare Stream en prod)
+/public/videos/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
