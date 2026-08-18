@@ -124,7 +124,8 @@ export async function getCursoBySlug(slug: string) {
       descripcion,
       duracionTexto,
       precio,
-      currency
+      currency,
+      beneficios[] { emoji, texto }
     }`,
     { slug }
   );

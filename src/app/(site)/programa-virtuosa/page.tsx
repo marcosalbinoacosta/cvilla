@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
-import { getInfoContacto } from "@/sanity/queries";
+import { getInfoContacto, getCursoBySlug } from "@/sanity/queries";
 import VirtuosaPreLanzamiento from "./VirtuosaPreLanzamiento";
 
 const DESCRIPTION =
@@ -28,13 +28,16 @@ export const metadata: Metadata = {
 export const revalidate = 60;
 
 export default async function Page() {
-  const contacto = await getInfoContacto();
+  const [contacto, curso] = await Promise.all([
+    getInfoContacto(),
+    getCursoBySlug("virtuosa"),
+  ]);
 
   return (
     <>
       <Navbar dark />
       <main>
-        <VirtuosaPreLanzamiento />
+        <VirtuosaPreLanzamiento beneficios={curso?.beneficios} />
       </main>
       <Footer data={contacto} />
       <WhatsAppButton phone={contacto?.whatsapp} />

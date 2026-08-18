@@ -74,9 +74,22 @@ export default defineType({
     }),
     defineField({
       name: "beneficios",
-      title: "Qué vas a lograr",
+      title: "Qué incluye",
+      description: "Lista con ícono que se muestra en la página del curso. Ej: 🤝 / 'Acceso a la Comunidad de Emprendedoras'.",
       type: "array",
-      of: [{ type: "string" }],
+      of: [
+        {
+          type: "object",
+          name: "beneficio",
+          fields: [
+            defineField({ name: "emoji", title: "Emoji", type: "string" }),
+            defineField({ name: "texto", title: "Texto", type: "string" }),
+          ],
+          preview: {
+            select: { title: "texto", subtitle: "emoji" },
+          },
+        },
+      ],
     }),
     defineField({
       name: "videoIntroId",

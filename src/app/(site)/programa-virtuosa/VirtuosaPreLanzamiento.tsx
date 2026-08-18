@@ -19,6 +19,17 @@ function formatPesos(n: number) {
 
 type FormState = "idle" | "loading" | "success" | "error";
 
+type Beneficio = { emoji?: string; texto?: string };
+
+const BENEFICIOS_DEFAULT: Beneficio[] = [
+  { emoji: "👩‍💼", texto: "1 encuentro grupal en vivo conmigo." },
+  { emoji: "🤝", texto: "Acceso a la Comunidad de Emprendedoras Cata Villafañe." },
+  {
+    emoji: "🎁",
+    texto: "Beneficios exclusivos para futuras mentorías, talleres o eventos.",
+  },
+];
+
 type CuponAplicado = {
   codigo: string;
   descuento: number;
@@ -471,8 +482,14 @@ function WaitlistForm() {
   );
 }
 
-export default function VirtuosaPreLanzamiento() {
+export default function VirtuosaPreLanzamiento({
+  beneficios,
+}: {
+  beneficios?: Beneficio[];
+}) {
   const isLaunched = new Date() >= LAUNCH_DATE;
+  const listaBeneficios =
+    beneficios && beneficios.length > 0 ? beneficios : BENEFICIOS_DEFAULT;
 
   return (
     <section className="bg-navy min-h-screen pt-32 pb-20 px-6 md:px-12 lg:px-20 relative overflow-hidden">
@@ -520,22 +537,15 @@ export default function VirtuosaPreLanzamiento() {
           </p>
 
           <ul className="text-left max-w-md mx-auto space-y-4 mb-12">
-            <li className="flex items-start gap-3 text-white/85 font-light leading-relaxed">
-              <span aria-hidden="true">👩‍💼</span>
-              <span>1 encuentro grupal en vivo conmigo.</span>
-            </li>
-            <li className="flex items-start gap-3 text-white/85 font-light leading-relaxed">
-              <span aria-hidden="true">🤝</span>
-              <span>
-                Acceso a la Comunidad de Emprendedoras Cata Villafañe.
-              </span>
-            </li>
-            <li className="flex items-start gap-3 text-white/85 font-light leading-relaxed">
-              <span aria-hidden="true">🎁</span>
-              <span>
-                Beneficios exclusivos para futuras mentorías, talleres o eventos.
-              </span>
-            </li>
+            {listaBeneficios.map((b, i) => (
+              <li
+                key={i}
+                className="flex items-start gap-3 text-white/85 font-light leading-relaxed"
+              >
+                <span aria-hidden="true">{b.emoji}</span>
+                <span>{b.texto}</span>
+              </li>
+            ))}
           </ul>
 
           <div className="inline-flex flex-col items-center gap-3 px-10 py-7 rounded-sm border border-white/10 bg-white/[0.04] backdrop-blur-sm">
