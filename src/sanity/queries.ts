@@ -33,12 +33,33 @@ export async function getServicios() {
       titulo,
       "slug": slug.current,
       etiqueta,
-      subtitulo,
+      subtituloIntro,
+      subtituloDestacado,
+      tagline,
       descripcion,
       descripcionLarga,
       "imagenUrl": imagen.asset->url,
+      ctaTexto,
+      ctaLink,
       incluye,
       orden
+    }`
+  );
+}
+
+export async function getServicioVirtuosa() {
+  return client.fetch(
+    `*[_type == "servicio" && slug.current == "virtuosa"][0] {
+      titulo,
+      etiqueta,
+      subtituloIntro,
+      subtituloDestacado,
+      tagline,
+      descripcion,
+      descripcionLarga,
+      "imagenUrl": imagen.asset->url,
+      ctaTexto,
+      ctaLink
     }`
   );
 }

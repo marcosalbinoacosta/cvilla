@@ -13,17 +13,20 @@ import {
   getCharlasImages,
   getSobreMi,
   getInfoContacto,
+  getServicioVirtuosa,
 } from "@/sanity/queries";
 
 export const revalidate = 60; // revalidar cada 60 segundos
 
 export default async function Home() {
-  const [testimonios, charlasImages, sobreMi, contacto] = await Promise.all([
-    getTestimonios(),
-    getCharlasImages(),
-    getSobreMi(),
-    getInfoContacto(),
-  ]);
+  const [testimonios, charlasImages, sobreMi, contacto, servicioVirtuosa] =
+    await Promise.all([
+      getTestimonios(),
+      getCharlasImages(),
+      getSobreMi(),
+      getInfoContacto(),
+      getServicioVirtuosa(),
+    ]);
 
   return (
     <>
@@ -31,7 +34,7 @@ export default async function Home() {
       <main>
         <Hero />
         <Proposito />
-        <Servicios charlasImages={charlasImages} />
+        <Servicios charlasImages={charlasImages} servicioVirtuosa={servicioVirtuosa} />
         <Testimonios testimonios={testimonios} />
         <SobreMi data={sobreMi} />
         <CtaBanner />

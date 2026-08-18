@@ -18,19 +18,33 @@ export default defineType({
       options: { source: "titulo" },
     }),
     defineField({
-      name: "subtitulo",
-      title: "Subtítulo / Frase destacada",
+      name: "subtituloIntro",
+      title: "Subtítulo — texto introductorio",
       type: "string",
+      description: "Parte inicial en cursiva. Ej: 'Es hora de'",
+    }),
+    defineField({
+      name: "subtituloDestacado",
+      title: "Subtítulo — frase destacada",
+      type: "string",
+      description: "Parte final, resaltada en color. Ej: 'dar el próximo paso.'",
+    }),
+    defineField({
+      name: "tagline",
+      title: "Línea destacada",
+      type: "string",
+      description:
+        "Línea corta en mayúsculas debajo del subtítulo. Ej: '1 encuentro grupal en vivo · 1 hora de estrategia para tus primeros pasos'",
     }),
     defineField({
       name: "descripcion",
-      title: "Descripción corta",
+      title: "Descripción — primer párrafo",
       type: "text",
       rows: 3,
     }),
     defineField({
       name: "descripcionLarga",
-      title: "Descripción completa",
+      title: "Descripción — segundo párrafo",
       type: "text",
       rows: 6,
     }),
@@ -44,7 +58,19 @@ export default defineType({
       name: "etiqueta",
       title: "Etiqueta",
       type: "string",
-      description: "Ej: '01 · Programa', '1 a 1', 'Grupal'",
+      description: "Ej: '01 · Curso', '1 a 1', 'Grupal'",
+    }),
+    defineField({
+      name: "ctaTexto",
+      title: "Botón — texto",
+      type: "string",
+      description: "Ej: 'Da el próximo paso'",
+    }),
+    defineField({
+      name: "ctaLink",
+      title: "Botón — link",
+      type: "string",
+      description: "Ej: '/programa-virtuosa'",
     }),
     defineField({
       name: "incluye",

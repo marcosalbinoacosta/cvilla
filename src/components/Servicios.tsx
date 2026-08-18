@@ -12,6 +12,19 @@ type CharlaImage = {
   alto: number;
 };
 
+type ServicioVirtuosa = {
+  titulo?: string;
+  etiqueta?: string;
+  subtituloIntro?: string;
+  subtituloDestacado?: string;
+  tagline?: string;
+  descripcion?: string;
+  descripcionLarga?: string;
+  imagenUrl?: string;
+  ctaTexto?: string;
+  ctaLink?: string;
+} | null;
+
 const MARQUEE_H = 220;
 const MARQUEE_GAP = 12;
 
@@ -70,9 +83,26 @@ function CharlasMarquee({ images }: { images: CharlaImage[] }) {
   );
 }
 
-function VirtuosaCard() {
+function VirtuosaCard({ data }: { data: ServicioVirtuosa }) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
+
+  const etiqueta = data?.etiqueta || "01 · Curso";
+  const titulo = data?.titulo || "Emprendé con Confianza";
+  const subtituloIntro = data?.subtituloIntro || "Es hora de";
+  const subtituloDestacado = data?.subtituloDestacado || "dar el próximo paso.";
+  const tagline =
+    data?.tagline ||
+    "1 encuentro grupal en vivo · 1 hora de estrategia para tus primeros pasos";
+  const descripcion =
+    data?.descripcion ||
+    "Si estás empezando tu emprendimiento y te llenás de dudas —por dónde arranco, si mi idea sirve, qué hago primero— este curso te ordena las ideas y te da dirección.";
+  const descripcionLarga =
+    data?.descripcionLarga ||
+    "En una hora vas a definir prioridades y tomar decisiones con más seguridad, con acceso a la comunidad y beneficios exclusivos.";
+  const imagenUrl = data?.imagenUrl || "/images/charla.jpeg";
+  const ctaTexto = data?.ctaTexto || "Da el próximo paso";
+  const ctaLink = data?.ctaLink || "/programa-virtuosa";
 
   useEffect(() => {
     const el = cardRef.current;
@@ -102,9 +132,9 @@ function VirtuosaCard() {
         <div className="relative h-[280px] md:h-auto overflow-hidden">
           <div className="absolute inset-0 will-change-transform">
             <Image
-              src="/images/charla.jpeg"
+              src={imagenUrl}
               quality={75}
-              alt="Emprendé con Confianza"
+              alt={titulo}
               fill
               className={`object-cover transition-transform duration-[2s] ease-out ${
                 visible ? "scale-105" : "scale-100"
@@ -127,7 +157,7 @@ function VirtuosaCard() {
             }`}
             style={{ transitionDelay: "300ms" }}
           >
-            01 &middot; Curso
+            {etiqueta}
           </p>
           <h3
             className={`font-serif text-3xl md:text-4xl lg:text-5xl font-normal text-navy mb-4 leading-tight transition-all duration-700 ${
@@ -135,7 +165,7 @@ function VirtuosaCard() {
             }`}
             style={{ transitionDelay: "400ms" }}
           >
-            Emprendé con Confianza
+            {titulo}
           </h3>
           <p
             className={`font-serif text-xl md:text-2xl lg:text-3xl italic text-navy/80 mb-5 leading-snug transition-all duration-700 ${
@@ -143,9 +173,9 @@ function VirtuosaCard() {
             }`}
             style={{ transitionDelay: "500ms" }}
           >
-            Es hora de{" "}
+            {subtituloIntro}{" "}
             <span className="font-script text-accent-light not-italic">
-              dar el próximo paso.
+              {subtituloDestacado}
             </span>
           </p>
           <p
@@ -154,8 +184,7 @@ function VirtuosaCard() {
             }`}
             style={{ transitionDelay: "600ms" }}
           >
-            1 encuentro grupal en vivo &middot; 1 hora de estrategia para tus
-            primeros pasos
+            {tagline}
           </p>
           <p
             className={`text-sm md:text-base text-text font-light leading-relaxed mb-3 transition-all duration-700 ${
@@ -163,9 +192,7 @@ function VirtuosaCard() {
             }`}
             style={{ transitionDelay: "700ms" }}
           >
-            Si estás empezando tu emprendimiento y te llenás de dudas —por
-            dónde arranco, si mi idea sirve, qué hago primero— este curso te
-            ordena las ideas y te da dirección.
+            {descripcion}
           </p>
           <p
             className={`text-sm md:text-base text-text font-light leading-relaxed mb-8 transition-all duration-700 ${
@@ -173,8 +200,7 @@ function VirtuosaCard() {
             }`}
             style={{ transitionDelay: "800ms" }}
           >
-            En una hora vas a definir prioridades y tomar decisiones con más
-            seguridad, con acceso a la comunidad y beneficios exclusivos.
+            {descripcionLarga}
           </p>
           <div
             className={`transition-all duration-700 ${
@@ -183,10 +209,10 @@ function VirtuosaCard() {
             style={{ transitionDelay: "900ms" }}
           >
             <Link
-              href="/programa-virtuosa"
+              href={ctaLink}
               className="magnetic-btn pulse-glow btn-gradient inline-block text-white text-xs md:text-sm font-medium uppercase tracking-widest px-8 py-4"
             >
-              Da el próximo paso
+              {ctaTexto}
             </Link>
           </div>
         </div>
@@ -195,7 +221,13 @@ function VirtuosaCard() {
   );
 }
 
-export default function Servicios({ charlasImages }: { charlasImages: CharlaImage[] }) {
+export default function Servicios({
+  charlasImages,
+  servicioVirtuosa,
+}: {
+  charlasImages: CharlaImage[];
+  servicioVirtuosa?: ServicioVirtuosa;
+}) {
   return (
     <section
       id="servicios"
@@ -215,7 +247,7 @@ export default function Servicios({ charlasImages }: { charlasImages: CharlaImag
 
         {/* 01 — Virtuosa (full-width) */}
         <div className="mb-6">
-          <VirtuosaCard />
+          <VirtuosaCard data={servicioVirtuosa ?? null} />
         </div>
 
         {/* 02 & 03 — Mentorías (2 columnas) */}
