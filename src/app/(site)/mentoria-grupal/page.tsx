@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getFaqs } from "@/sanity/queries";
+import { getFaqs, getMentoria } from "@/sanity/queries";
 import MentoriaGrupalContent from "./MentoriaGrupalContent";
 
 const DESCRIPTION =
@@ -23,6 +23,9 @@ export const metadata: Metadata = {
 };
 
 export default async function Page() {
-  const faqs = await getFaqs("grupal");
-  return <MentoriaGrupalContent faqs={faqs} />;
+  const [faqs, mentoria] = await Promise.all([
+    getFaqs("grupal"),
+    getMentoria("grupal"),
+  ]);
+  return <MentoriaGrupalContent faqs={faqs} mentoria={mentoria} />;
 }

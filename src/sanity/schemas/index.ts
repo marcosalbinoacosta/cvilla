@@ -7,6 +7,7 @@ import faq from "./faq";
 import curso from "./curso";
 import modulo from "./modulo";
 import cupon from "./cupon";
+import mentoria from "./mentoria";
 
 export const schemaTypes = [
   testimonio,
@@ -18,4 +19,5 @@ export const schemaTypes = [
   curso,
   modulo,
   cupon,
+  mentoria,
 ];

@@ -7,16 +7,21 @@ import ScrollReveal from "@/components/ScrollReveal";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 
-const incluye = [
-  "Sesiones privadas 1 a 1 por videollamada",
-  "Plan de acción personalizado para tu negocio",
-  "Análisis de tu modelo de negocio actual",
-  "Estrategia de ventas y posicionamiento",
-  "Acompañamiento entre sesiones vía mensajes",
-  "Material de apoyo y ejercicios prácticos",
-];
+type Mentoria = {
+  paraQuienEyebrow?: string;
+  paraQuienTitulo?: string;
+  paraQuienItems?: string[];
+  incluyeEyebrow?: string;
+  incluyeTituloIntro?: string;
+  incluyeTituloDestacado?: string;
+  incluyeTituloSufijo?: string;
+  incluyeItems?: string[];
+  incluyeNota?: string;
+};
 
-const paraQuien = [
+const PARA_QUIEN_EYEBROW_DEFAULT = "¿Es para vos?";
+const PARA_QUIEN_TITULO_DEFAULT = "Este espacio es para vos si…";
+const PARA_QUIEN_ITEMS_DEFAULT = [
   "Querés trabajar tu emprendimiento de manera 1 a 1, con foco en tu caso particular.",
   "Necesitás claridad, estrategia y acompañamiento adaptado a tu realidad.",
   "Buscás destrabar dudas concretas y tomar decisiones con mayor seguridad.",
@@ -24,6 +29,19 @@ const paraQuien = [
   "Preferís un proceso más profundo, flexible y personalizado.",
   "Querés avanzar con un plan hecho a tu medida.",
 ];
+
+const INCLUYE_EYEBROW_DEFAULT = "¿Qué incluye?";
+const INCLUYE_TITULO_INTRO_DEFAULT = "Todo lo que necesitás para";
+const INCLUYE_TITULO_DESTACADO_DEFAULT = "avanzar";
+const INCLUYE_ITEMS_DEFAULT = [
+  "Sesiones privadas 1 a 1 por videollamada",
+  "Plan de acción personalizado para tu negocio",
+  "Análisis de tu modelo de negocio actual",
+  "Estrategia de ventas y posicionamiento",
+  "Acompañamiento entre sesiones vía mensajes",
+  "Material de apoyo y ejercicios prácticos",
+];
+const INCLUYE_NOTA_DEFAULT = "La primera conversación es sin compromiso.";
 
 type Faq = { _id?: string; pregunta: string; respuesta: string };
 
@@ -245,10 +263,27 @@ function FormIndividual() {
 
 export default function MentoriaIndividualContent({
   faqs,
+  mentoria,
 }: {
   faqs?: Faq[];
+  mentoria?: Mentoria;
 }) {
   const listaFaqs = faqs?.length ? faqs : FAQS_DEFAULT;
+  const paraQuienEyebrow = mentoria?.paraQuienEyebrow || PARA_QUIEN_EYEBROW_DEFAULT;
+  const paraQuienTitulo = mentoria?.paraQuienTitulo || PARA_QUIEN_TITULO_DEFAULT;
+  const paraQuienItems = mentoria?.paraQuienItems?.length
+    ? mentoria.paraQuienItems
+    : PARA_QUIEN_ITEMS_DEFAULT;
+  const incluyeEyebrow = mentoria?.incluyeEyebrow || INCLUYE_EYEBROW_DEFAULT;
+  const incluyeTituloIntro =
+    mentoria?.incluyeTituloIntro || INCLUYE_TITULO_INTRO_DEFAULT;
+  const incluyeTituloDestacado =
+    mentoria?.incluyeTituloDestacado || INCLUYE_TITULO_DESTACADO_DEFAULT;
+  const incluyeTituloSufijo = mentoria?.incluyeTituloSufijo || "";
+  const incluyeItems = mentoria?.incluyeItems?.length
+    ? mentoria.incluyeItems
+    : INCLUYE_ITEMS_DEFAULT;
+  const incluyeNota = mentoria?.incluyeNota || INCLUYE_NOTA_DEFAULT;
   const heroRef = useRef<HTMLDivElement>(null);
   const [loaded, setLoaded] = useState(false);
 
@@ -344,15 +379,15 @@ export default function MentoriaIndividualContent({
           <div className="max-w-3xl mx-auto">
             <ScrollReveal animation="fade-up" className="mb-10">
               <p className="text-[0.72rem] tracking-[0.18em] uppercase text-navy/70 mb-3">
-                ¿Es para vos?
+                {paraQuienEyebrow}
               </p>
               <h2 className="font-serif text-2xl md:text-3xl font-light text-navy leading-tight">
-                Este espacio es para vos si…
+                {paraQuienTitulo}
               </h2>
             </ScrollReveal>
             <ScrollReveal animation="fade-up" delay={100}>
               <ul className="space-y-4">
-                {paraQuien.map((item, i) => (
+                {paraQuienItems.map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
                     <span className="w-1.5 h-1.5 rounded-full bg-gradient-to-br from-accent to-accent-light shrink-0 mt-2.5" />
                     <span className="text-base md:text-lg text-navy/80 font-light leading-relaxed">
@@ -371,16 +406,17 @@ export default function MentoriaIndividualContent({
             {/* Left — qué incluye */}
             <ScrollReveal animation="slide-right">
               <p className="text-[0.72rem] tracking-[0.18em] uppercase text-navy/70 mb-3">
-                ¿Qué incluye?
+                {incluyeEyebrow}
               </p>
               <h2 className="font-serif text-2xl md:text-3xl font-light text-navy leading-tight mb-8">
-                Todo lo que necesitás para{" "}
+                {incluyeTituloIntro}{" "}
                 <span className="font-script text-shimmer text-3xl">
-                  avanzar
+                  {incluyeTituloDestacado}
                 </span>
+                {incluyeTituloSufijo && <> {incluyeTituloSufijo}</>}
               </h2>
               <div className="space-y-4 mb-8">
-                {incluye.map((item, i) => (
+                {incluyeItems.map((item, i) => (
                   <div key={i} className="flex items-start gap-3">
                     <span className="w-1.5 h-1.5 rounded-full bg-gradient-to-br from-accent to-accent-light shrink-0 mt-2" />
                     <span className="text-sm md:text-base text-navy/80 font-light leading-relaxed">
@@ -390,7 +426,7 @@ export default function MentoriaIndividualContent({
                 ))}
               </div>
               <p className="text-sm text-navy/70 font-light italic">
-                La primera conversación es sin compromiso.
+                {incluyeNota}
               </p>
             </ScrollReveal>
 

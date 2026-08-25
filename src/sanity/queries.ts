@@ -116,6 +116,23 @@ export async function getFaqs(seccion: "individual" | "grupal" | "general") {
   );
 }
 
+export async function getMentoria(seccion: "individual" | "grupal") {
+  return client.fetch(
+    `*[_type == "mentoria" && seccion == $seccion][0] {
+      paraQuienEyebrow,
+      paraQuienTitulo,
+      paraQuienItems,
+      incluyeEyebrow,
+      incluyeTituloIntro,
+      incluyeTituloDestacado,
+      incluyeTituloSufijo,
+      incluyeItems,
+      incluyeNota
+    }`,
+    { seccion }
+  );
+}
+
 export async function getCursoBySlug(slug: string) {
   return client.fetch(
     `*[_type == "curso" && slug.current == $slug][0] {

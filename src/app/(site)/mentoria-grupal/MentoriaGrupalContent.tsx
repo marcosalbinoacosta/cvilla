@@ -7,7 +7,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 
-const incluye = [
+const INCLUYE_ITEMS_DEFAULT = [
   "Encuentros grupales en vivo por videollamada",
   "Grupos reducidos (máximo 8 emprendedoras)",
   "Material de trabajo y ejercicios prácticos",
@@ -16,13 +16,34 @@ const incluye = [
   "Acceso a grabaciones de las sesiones",
 ];
 
-const paraQuien = [
+type Mentoria = {
+  paraQuienEyebrow?: string;
+  paraQuienTitulo?: string;
+  paraQuienItems?: string[];
+  incluyeEyebrow?: string;
+  incluyeTituloIntro?: string;
+  incluyeTituloDestacado?: string;
+  incluyeTituloSufijo?: string;
+  incluyeItems?: string[];
+  incluyeNota?: string;
+};
+
+const PARA_QUIEN_EYEBROW_DEFAULT = "¿Es para vos?";
+const PARA_QUIEN_TITULO_DEFAULT = "Este espacio es para vos si…";
+const PARA_QUIEN_ITEMS_DEFAULT = [
   "Querés avanzar en tu emprendimiento acompañada por otras mujeres que están en una etapa similar.",
   "Te sirve aprender en comunidad, compartir experiencias y sentirte acompañada.",
   "Te interesa sentirte parte de un grupo que te impulsa a sostener el proceso.",
   "Tenés ganas de aprender, participar y comprometerte con tu crecimiento.",
   "Querés destrabar ideas y tomar decisiones con apoyo y en grupo.",
 ];
+
+const INCLUYE_EYEBROW_DEFAULT = "¿Qué incluye?";
+const INCLUYE_TITULO_INTRO_DEFAULT = "Estrategia colectiva,";
+const INCLUYE_TITULO_DESTACADO_DEFAULT = "resultados";
+const INCLUYE_TITULO_SUFIJO_DEFAULT = "reales";
+const INCLUYE_NOTA_DEFAULT =
+  "Dejá tus datos y te aviso apenas se abra el próximo grupo.";
 
 type Faq = { _id?: string; pregunta: string; respuesta: string };
 
@@ -224,10 +245,28 @@ function FormGrupal() {
 
 export default function MentoriaGrupalContent({
   faqs,
+  mentoria,
 }: {
   faqs?: Faq[];
+  mentoria?: Mentoria;
 }) {
   const listaFaqs = faqs?.length ? faqs : FAQS_DEFAULT;
+  const paraQuienEyebrow = mentoria?.paraQuienEyebrow || PARA_QUIEN_EYEBROW_DEFAULT;
+  const paraQuienTitulo = mentoria?.paraQuienTitulo || PARA_QUIEN_TITULO_DEFAULT;
+  const paraQuienItems = mentoria?.paraQuienItems?.length
+    ? mentoria.paraQuienItems
+    : PARA_QUIEN_ITEMS_DEFAULT;
+  const incluyeEyebrow = mentoria?.incluyeEyebrow || INCLUYE_EYEBROW_DEFAULT;
+  const incluyeTituloIntro =
+    mentoria?.incluyeTituloIntro || INCLUYE_TITULO_INTRO_DEFAULT;
+  const incluyeTituloDestacado =
+    mentoria?.incluyeTituloDestacado || INCLUYE_TITULO_DESTACADO_DEFAULT;
+  const incluyeTituloSufijo =
+    mentoria?.incluyeTituloSufijo || INCLUYE_TITULO_SUFIJO_DEFAULT;
+  const incluyeItems = mentoria?.incluyeItems?.length
+    ? mentoria.incluyeItems
+    : INCLUYE_ITEMS_DEFAULT;
+  const incluyeNota = mentoria?.incluyeNota || INCLUYE_NOTA_DEFAULT;
   const heroRef = useRef<HTMLDivElement>(null);
   const [loaded, setLoaded] = useState(false);
 
@@ -319,15 +358,15 @@ export default function MentoriaGrupalContent({
           <div className="max-w-3xl mx-auto">
             <ScrollReveal animation="fade-up" className="mb-10">
               <p className="text-[0.72rem] tracking-[0.18em] uppercase text-navy/70 mb-3">
-                ¿Es para vos?
+                {paraQuienEyebrow}
               </p>
               <h2 className="font-serif text-2xl md:text-3xl font-light text-navy leading-tight">
-                Este espacio es para vos si…
+                {paraQuienTitulo}
               </h2>
             </ScrollReveal>
             <ScrollReveal animation="fade-up" delay={100}>
               <ul className="space-y-4">
-                {paraQuien.map((item, i) => (
+                {paraQuienItems.map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
                     <span className="w-1.5 h-1.5 rounded-full bg-gradient-to-br from-accent to-accent-light shrink-0 mt-2.5" />
                     <span className="text-base md:text-lg text-navy/80 font-light leading-relaxed">
@@ -346,17 +385,17 @@ export default function MentoriaGrupalContent({
             {/* Left — qué incluye */}
             <ScrollReveal animation="slide-right">
               <p className="text-[0.72rem] tracking-[0.18em] uppercase text-navy/70 mb-3">
-                ¿Qué incluye?
+                {incluyeEyebrow}
               </p>
               <h2 className="font-serif text-2xl md:text-3xl font-light text-navy leading-tight mb-8">
-                Estrategia colectiva,{" "}
+                {incluyeTituloIntro}{" "}
                 <span className="font-script text-shimmer text-3xl">
-                  resultados
-                </span>{" "}
-                reales
+                  {incluyeTituloDestacado}
+                </span>
+                {incluyeTituloSufijo && <> {incluyeTituloSufijo}</>}
               </h2>
               <div className="space-y-4 mb-8">
-                {incluye.map((item, i) => (
+                {incluyeItems.map((item, i) => (
                   <div key={i} className="flex items-start gap-3">
                     <span className="w-1.5 h-1.5 rounded-full bg-gradient-to-br from-accent to-accent-light shrink-0 mt-2" />
                     <span className="text-sm md:text-base text-navy/80 font-light leading-relaxed">
@@ -366,7 +405,7 @@ export default function MentoriaGrupalContent({
                 ))}
               </div>
               <p className="text-sm text-navy/70 font-light italic">
-                Dejá tus datos y te aviso apenas se abra el próximo grupo.
+                {incluyeNota}
               </p>
             </ScrollReveal>
 
