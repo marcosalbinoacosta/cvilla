@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { getFaqs, getMentoria } from "@/sanity/queries";
 import MentoriaGrupalContent from "./MentoriaGrupalContent";
 
+export const revalidate = 60;
+
 const DESCRIPTION =
   "Espacio de crecimiento compartido para emprendedoras que quieren aprender, desafiarse y avanzar juntas con estrategia y acompañamiento.";
 
