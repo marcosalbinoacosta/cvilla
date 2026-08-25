@@ -24,26 +24,33 @@ const paraQuien = [
   "Querés destrabar ideas y tomar decisiones con apoyo y en grupo.",
 ];
 
-const faqs = [
+type Faq = { _id?: string; pregunta: string; respuesta: string };
+
+const FAQS_DEFAULT: Faq[] = [
   {
-    q: "¿Cuántas personas participan en cada grupo?",
-    a: "Los grupos son reducidos, de máximo 8 emprendedoras. Esto garantiza que cada una reciba atención y feedback personalizado dentro del espacio grupal.",
+    pregunta: "¿Cuántas personas participan en cada grupo?",
+    respuesta:
+      "Los grupos son reducidos, de máximo 8 emprendedoras. Esto garantiza que cada una reciba atención y feedback personalizado dentro del espacio grupal.",
   },
   {
-    q: "¿Cuánto dura la mentoría grupal?",
-    a: "Cada ciclo tiene una duración definida que se comunica al abrir inscripciones. Generalmente son entre 4 y 8 semanas con encuentros semanales.",
+    pregunta: "¿Cuánto dura la mentoría grupal?",
+    respuesta:
+      "Cada ciclo tiene una duración definida que se comunica al abrir inscripciones. Generalmente son entre 4 y 8 semanas con encuentros semanales.",
   },
   {
-    q: "¿Puedo participar si recién estoy empezando?",
-    a: "Sí, siempre que tengas una idea de negocio en marcha o un emprendimiento que querés hacer crecer. El grupo es un espacio para todas las etapas.",
+    pregunta: "¿Puedo participar si recién estoy empezando?",
+    respuesta:
+      "Sí, siempre que tengas una idea de negocio en marcha o un emprendimiento que querés hacer crecer. El grupo es un espacio para todas las etapas.",
   },
   {
-    q: "¿Qué pasa si no puedo asistir a una sesión?",
-    a: "Todas las sesiones se graban y quedan disponibles para que puedas verlas cuando quieras. Además, tenés acceso a la comunidad privada para no perder el hilo.",
+    pregunta: "¿Qué pasa si no puedo asistir a una sesión?",
+    respuesta:
+      "Todas las sesiones se graban y quedan disponibles para que puedas verlas cuando quieras. Además, tenés acceso a la comunidad privada para no perder el hilo.",
   },
   {
-    q: "¿Cuándo abre el próximo grupo?",
-    a: "Las inscripciones se abren periódicamente. Escribime para sumarte a la lista de espera y ser la primera en enterarte cuando se abra un nuevo grupo.",
+    pregunta: "¿Cuándo abre el próximo grupo?",
+    respuesta:
+      "Las inscripciones se abren periódicamente. Escribime para sumarte a la lista de espera y ser la primera en enterarte cuando se abra un nuevo grupo.",
   },
 ];
 
@@ -215,7 +222,12 @@ function FormGrupal() {
   );
 }
 
-export default function MentoriaGrupalContent() {
+export default function MentoriaGrupalContent({
+  faqs,
+}: {
+  faqs?: Faq[];
+}) {
+  const listaFaqs = faqs?.length ? faqs : FAQS_DEFAULT;
   const heroRef = useRef<HTMLDivElement>(null);
   const [loaded, setLoaded] = useState(false);
 
@@ -376,8 +388,12 @@ export default function MentoriaGrupalContent() {
 
             <ScrollReveal animation="fade-up">
               <div>
-                {faqs.map((faq) => (
-                  <FaqItem key={faq.q} q={faq.q} a={faq.a} />
+                {listaFaqs.map((faq) => (
+                  <FaqItem
+                    key={faq._id ?? faq.pregunta}
+                    q={faq.pregunta}
+                    a={faq.respuesta}
+                  />
                 ))}
               </div>
             </ScrollReveal>

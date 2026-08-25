@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getFaqs } from "@/sanity/queries";
 import MentoriaIndividualContent from "./MentoriaIndividualContent";
 
 const DESCRIPTION =
@@ -21,6 +22,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Page() {
-  return <MentoriaIndividualContent />;
+export default async function Page() {
+  const faqs = await getFaqs("individual");
+  return <MentoriaIndividualContent faqs={faqs} />;
 }

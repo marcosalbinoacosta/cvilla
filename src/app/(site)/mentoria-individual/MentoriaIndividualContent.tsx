@@ -25,26 +25,33 @@ const paraQuien = [
   "Querés avanzar con un plan hecho a tu medida.",
 ];
 
-const faqs = [
+type Faq = { _id?: string; pregunta: string; respuesta: string };
+
+const FAQS_DEFAULT: Faq[] = [
   {
-    q: "¿Cuánto dura el proceso de mentoría?",
-    a: "Depende de tus objetivos. Podemos trabajar desde sesiones puntuales hasta un acompañamiento de varios meses. Lo definimos juntas en la primera conversación.",
+    pregunta: "¿Cuánto dura el proceso de mentoría?",
+    respuesta:
+      "Depende de tus objetivos. Podemos trabajar desde sesiones puntuales hasta un acompañamiento de varios meses. Lo definimos juntas en la primera conversación.",
   },
   {
-    q: "¿Es solo para emprendedoras?",
-    a: "Trabajo principalmente con emprendedoras y dueñas de pymes, pero si tenés un proyecto o negocio que querés hacer crecer, podemos conversar.",
+    pregunta: "¿Es solo para emprendedoras?",
+    respuesta:
+      "Trabajo principalmente con emprendedoras y dueñas de pymes, pero si tenés un proyecto o negocio que querés hacer crecer, podemos conversar.",
   },
   {
-    q: "¿Qué pasa si no sé bien qué necesito?",
-    a: "Justamente para eso es la primera sesión de diagnóstico. Muchas llegan sin claridad y eso es completamente normal. Mi trabajo es ayudarte a encontrarla.",
+    pregunta: "¿Qué pasa si no sé bien qué necesito?",
+    respuesta:
+      "Justamente para eso es la primera sesión de diagnóstico. Muchas llegan sin claridad y eso es completamente normal. Mi trabajo es ayudarte a encontrarla.",
   },
   {
-    q: "¿Las sesiones son presenciales o virtuales?",
-    a: "Las sesiones son por videollamada, lo que te permite participar desde cualquier lugar. También hay opción presencial en Córdoba.",
+    pregunta: "¿Las sesiones son presenciales o virtuales?",
+    respuesta:
+      "Las sesiones son por videollamada, lo que te permite participar desde cualquier lugar. También hay opción presencial en Córdoba.",
   },
   {
-    q: "¿Cómo sé si la mentoría es para mí?",
-    a: "Si sentís que tu negocio necesita orden, dirección o un impulso estratégico, y estás dispuesta a comprometerte con el proceso, es para vos.",
+    pregunta: "¿Cómo sé si la mentoría es para mí?",
+    respuesta:
+      "Si sentís que tu negocio necesita orden, dirección o un impulso estratégico, y estás dispuesta a comprometerte con el proceso, es para vos.",
   },
 ];
 
@@ -236,7 +243,12 @@ function FormIndividual() {
   );
 }
 
-export default function MentoriaIndividualContent() {
+export default function MentoriaIndividualContent({
+  faqs,
+}: {
+  faqs?: Faq[];
+}) {
+  const listaFaqs = faqs?.length ? faqs : FAQS_DEFAULT;
   const heroRef = useRef<HTMLDivElement>(null);
   const [loaded, setLoaded] = useState(false);
 
@@ -400,8 +412,12 @@ export default function MentoriaIndividualContent() {
 
             <ScrollReveal animation="fade-up">
               <div>
-                {faqs.map((faq) => (
-                  <FaqItem key={faq.q} q={faq.q} a={faq.a} />
+                {listaFaqs.map((faq) => (
+                  <FaqItem
+                    key={faq._id ?? faq.pregunta}
+                    q={faq.pregunta}
+                    a={faq.respuesta}
+                  />
                 ))}
               </div>
             </ScrollReveal>
