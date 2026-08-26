@@ -178,6 +178,7 @@ function CheckoutForm() {
       productoSlug: PRODUCTO_SLUG,
       nombre: String(formData.get("nombre") ?? "").trim(),
       email: String(formData.get("email") ?? "").trim(),
+      telefono: String(formData.get("telefono") ?? "").trim(),
       ...(aplicado ? { cupon: aplicado.codigo } : {}),
     };
 
@@ -247,6 +248,26 @@ function CheckoutForm() {
           required
           maxLength={120}
           autoComplete="email"
+          disabled={status === "loading"}
+          className="w-full bg-white/10 border border-white/20 px-4 py-3 text-sm text-white placeholder-white/40 outline-none focus:border-accent transition-colors disabled:opacity-60"
+        />
+      </div>
+
+      <div>
+        <label
+          htmlFor="checkout-telefono"
+          className="block text-[0.7rem] tracking-[0.16em] uppercase text-white/70 mb-2"
+        >
+          Teléfono
+        </label>
+        <input
+          id="checkout-telefono"
+          name="telefono"
+          type="tel"
+          required
+          maxLength={40}
+          autoComplete="tel"
+          placeholder="Ej: 351 555 5555"
           disabled={status === "loading"}
           className="w-full bg-white/10 border border-white/20 px-4 py-3 text-sm text-white placeholder-white/40 outline-none focus:border-accent transition-colors disabled:opacity-60"
         />

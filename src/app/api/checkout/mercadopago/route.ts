@@ -14,6 +14,7 @@ const CheckoutSchema = z.object({
   // Normalizamos a minúsculas: NextAuth loguea con el email en minúsculas, así
   // que si acá guardáramos "MAIL@X.COM" quedarían dos usuarios distintos.
   email: z.string().trim().toLowerCase().email().max(120),
+  telefono: z.string().trim().max(40).optional(),
   cupon: z.string().trim().max(40).optional(),
 });
 
@@ -42,7 +43,7 @@ export async function POST(request: NextRequest) {
       { status: 400 }
     );
   }
-  const { productoSlug, nombre, email, cupon } = parsed.data;
+  const { productoSlug, nombre, email, telefono, cupon } = parsed.data;
 
   const accessToken = process.env.MP_ACCESS_TOKEN;
   const siteUrl =
@@ -86,7 +87,7 @@ export async function POST(request: NextRequest) {
 
   // Get-or-create user by email (minimal — no passwords, magic link auth).
   const existing = await db
-    .select({ id: schema.users.id })
+    .select({ id: schema.users.id, phone: schema.users.phone })
     .from(schema.users)
     .where(eq(schema.users.email, email))
     .limit(1);
@@ -95,7 +96,7 @@ export async function POST(request: NextRequest) {
   if (!userId) {
     const inserted = await db
       .insert(schema.users)
-      .values({ email, name: nombre })
+      .values({ email, name: nombre, phone: telefono ?? null })
       .returning({ id: schema.users.id });
     userId = inserted[0]?.id;
     if (!userId) {
@@ -104,6 +105,11 @@ export async function POST(request: NextRequest) {
         { status: 500 }
       );
     }
+  } else if (telefono && !existing[0]?.phone) {
+    await db
+      .update(schema.users)
+      .set({ phone: telefono })
+      .where(eq(schema.users.id, userId));
   }
 
   // Create pending purchase row first — referenced by MP external_reference.
@@ -142,7 +148,11 @@ export async function POST(request: NextRequest) {
             currency_id: curso.currency ?? "ARS",
           },
         ],
-        payer: { email, name: nombre },
+        payer: {
+          email,
+          name: nombre,
+          ...(telefono ? { phone: { number: telefono } } : {}),
+        },
         external_reference: compra.id,
         back_urls: {
           success: `${siteUrl}/comprar/gracias?compra=${compra.id}`,

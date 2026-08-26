@@ -132,6 +132,7 @@ function FormIndividual() {
       tipo: "mentoria-individual" as const,
       nombre: String(formData.get("nombre") ?? "").trim(),
       email: String(formData.get("email") ?? "").trim(),
+      whatsapp: String(formData.get("whatsapp") ?? "").trim(),
       etapa: String(formData.get("etapa") ?? "").trim(),
       expectativa: String(formData.get("expectativa") ?? "").trim(),
       website: String(formData.get("website") ?? ""),
@@ -207,6 +208,22 @@ function FormIndividual() {
             autoComplete="email"
             disabled={status === "loading"}
             placeholder="Tu email"
+            className="w-full px-4 py-3.5 border border-beige bg-cream/50 text-sm text-text placeholder-navy/30 outline-none focus:border-accent transition-colors duration-300 disabled:opacity-60"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="ind-whatsapp" className="block text-xs tracking-wider uppercase text-navy/75 mb-2">
+            Teléfono / WhatsApp
+          </label>
+          <input
+            id="ind-whatsapp"
+            name="whatsapp"
+            type="tel"
+            maxLength={40}
+            autoComplete="tel"
+            disabled={status === "loading"}
+            placeholder="Ej: 351 555 5555"
             className="w-full px-4 py-3.5 border border-beige bg-cream/50 text-sm text-text placeholder-navy/30 outline-none focus:border-accent transition-colors duration-300 disabled:opacity-60"
           />
         </div>
